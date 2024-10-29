@@ -5,6 +5,7 @@ import QtQuick
 import btuicontrols
 import QtQuick.LocalStorage
 import "Database.js" as DB
+import gaiaV3
 
 
 Page {
@@ -23,7 +24,14 @@ Page {
 
         DB.execute( 'SELECT * FROM devices;', (result) => {
             for (let i = 0; i < result.rows.length; i++) {
-                listModel.append({name: result.rows.item(i).name, address: result.rows.item(i).address, isOnline: false, uuid: result.rows.item(i).uuid});
+                listModel.append(
+                    {
+                        name: result.rows.item(i).name,
+                        address: result.rows.item(i).address,
+                        isOnline: result.rows.item(i).address === "11:11:11:11:11:11",
+                        uuid: result.rows.item(i).uuid
+                    }
+                );
             }
         });
     }
@@ -80,7 +88,8 @@ Page {
                             popup.uuid = delegate.uuid;
                             popup.open();
                         } else {
-                            bluetoothHandler.deviceAddress = delegate.address
+                            bluetoothHandler.deviceAddress = delegate.address;
+                            GAIARfcommClient.deviceName = delegate.name;
                         }
                     }
 

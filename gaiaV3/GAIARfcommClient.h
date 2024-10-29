@@ -10,6 +10,7 @@
 #include <QQmlApplicationEngine>
 #include "GAIAPropertyBase.h"
 #include "GAIAPropertyManager.h"
+#include "BluetoothSocketWrapper.h"
 
 class GAIARfcommClient: public QObject {
 
@@ -50,7 +51,8 @@ protected:
     GAIARfcommClient();  // private constructor
     GAIARfcommClient(QBluetoothSocket *socket);  // private constructor
     ~GAIARfcommClient() = default;
-    QBluetoothSocket *socket;
+//    QBluetoothSocket *socket;
+    BluetoothSocketWrapper *socket;
     QList<QByteArray> packetSplitter(const QByteArray &data) const;
     bool m_isConnected;
     bool isSecondaryConnection;

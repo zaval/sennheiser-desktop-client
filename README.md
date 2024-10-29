@@ -2,6 +2,8 @@
 
 This is an unofficial desktop client of Sennheiser Smart Control app.
 
+![main-window.png](images/main-window.png)
+
 Currently, this app works with Momentum 4 headphones.
 
 ## Requirements

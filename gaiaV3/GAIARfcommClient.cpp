@@ -44,7 +44,8 @@ void GAIARfcommClient::setAddress(const QBluetoothAddress &deviceAddress) {
 
 GAIARfcommClient::GAIARfcommClient():
     QObject(nullptr),
-    socket(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this)),
+//    socket(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this)),
+    socket(new BluetoothSocketWrapper(this)),
     m_isConnected(false),
     isSecondaryConnection(false),
     m_deviceAddress{},
@@ -52,9 +53,9 @@ GAIARfcommClient::GAIARfcommClient():
     deviceName("")
 {
 //    propertyManager = new GAIAPropertyManager(this);
-    connect(socket, &QBluetoothSocket::connected, this, &GAIARfcommClient::socketConnected);
-    connect(socket, &QBluetoothSocket::readyRead, this, &GAIARfcommClient::socketReadyRead);
-    connect(socket, &QBluetoothSocket::disconnected, this, &GAIARfcommClient::socketDisconnected);
+    connect(socket, &BluetoothSocketWrapper::connected, this, &GAIARfcommClient::socketConnected);
+    connect(socket, &BluetoothSocketWrapper::readyRead, this, &GAIARfcommClient::socketReadyRead);
+    connect(socket, &BluetoothSocketWrapper::disconnected, this, &GAIARfcommClient::socketDisconnected);
     connect(propertyManager, &GAIAPropertyManagerBase::propertyAdded, this, &GAIARfcommClient::propertyManagerAdded);
 }
 
@@ -153,7 +154,8 @@ QString GAIARfcommClient::getDeviceAddress() const {
 }
 
 GAIARfcommClient::GAIARfcommClient(QBluetoothSocket *socket) : QObject(nullptr),
-   socket(socket),
+//   socket(socket),
+   socket(new BluetoothSocketWrapper(nullptr)),
    m_isConnected(false),
    isSecondaryConnection(false),
    m_deviceAddress{},

@@ -1,0 +1,5690 @@
+{
+  "$schema": "../../../../lib/node-hooks/device-model.schema.json",
+
+  "product_name": "Momentum 4",
+  "protocol": "GAIAV3",
+  "features": [
+    {
+      "name": "user-eq-1"
+    },
+    {
+      "name": "audio-mode-1"
+    },
+    {
+      "name": "sound-personalization-1",
+      "minVersion": "2.12.0"
+    }
+  ],
+  "properties": [
+    {
+      "name": "Upgrade_CommitReq",
+      "Value": {
+        "type": "number",
+        "container": "plain"
+      },
+      "Get": {
+        "Event": {
+          "PI_command_name": "UPGRADE_GaiaCommit",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x0F",
+            "gaiaUpgradeTunnel": "Upgrade_DataIndication_Notification"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 70,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "Upgrade_DataIndication_Notification",
+            "parameter": [
+              {
+                "name": "otaCommand",
+                "description": "this is the tunnel for the ota commands",
+                "type": "UINT8",
+                "repitive": false
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0000",
+              "GAIA_notification_ID": "0x0C80",
+              "GAIA_error_ID": "0x0000"
+            },
+            "partition_key": "commands"
+          }
+        }
+      }
+    },
+    {
+      "name": "Upgrade_CompleteInd",
+      "Value": {
+        "type": "number",
+        "container": "plain"
+      },
+      "Get": {
+        "Event": {
+          "PI_command_name": "UPGRADE_GaiaComplete",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x12",
+            "gaiaUpgradeTunnel": "Upgrade_DataIndication_Notification"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 72,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "Upgrade_DataIndication_Notification",
+            "parameter": [
+              {
+                "name": "otaCommand",
+                "description": "this is the tunnel for the ota commands",
+                "type": "UINT8",
+                "repitive": false
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0000",
+              "GAIA_notification_ID": "0x0C80",
+              "GAIA_error_ID": "0x0000"
+            },
+            "partition_key": "commands"
+          }
+        }
+      }
+    },
+    {
+      "name": "Upgrade_Error",
+      "Value": {
+        "type": "number",
+        "container": "array",
+        "size": 2
+      },
+      "Get": {
+        "Event": {
+          "PI_command_name": "UPGRADE_GaiaError",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x11",
+            "gaiaUpgradeTunnel": "Upgrade_DataIndication_Notification"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 73,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT16",
+              "name": "Error code",
+              "PI_command_ID": 73,
+              "position": 1,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "Upgrade_DataIndication_Notification",
+            "parameter": [
+              {
+                "name": "otaCommand",
+                "description": "this is the tunnel for the ota commands",
+                "type": "UINT8",
+                "repitive": false
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0000",
+              "GAIA_notification_ID": "0x0C80",
+              "GAIA_error_ID": "0x0000"
+            },
+            "partition_key": "commands"
+          }
+        }
+      }
+    },
+    {
+      "name": "Upgrade_GaiaDataBytesRequest",
+      "note": "[cmdlength,number_of_bytes,offset]",
+      "Value": {
+        "type": "number",
+        "container": "array",
+        "length": 3
+      },
+      "Get": {
+        "Event": {
+          "PI_command_name": "UPGRADE_GaiaDataBytesRequest",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x03",
+            "gaiaUpgradeTunnel": "Upgrade_DataIndication_Notification"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 64,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT32",
+              "name": "Number of bytes",
+              "PI_command_ID": 64,
+              "position": 1,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT32",
+              "name": "Start offset",
+              "PI_command_ID": 64,
+              "position": 2,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "Upgrade_DataIndication_Notification",
+            "parameter": [
+              {
+                "name": "otaCommand",
+                "description": "this is the tunnel for the ota commands",
+                "type": "UINT8",
+                "repitive": false
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0000",
+              "GAIA_notification_ID": "0x0C80",
+              "GAIA_error_ID": "0x0000"
+            },
+            "partition_key": "commands"
+          }
+        }
+      }
+    },
+    {
+      "name": "Upgrade_GaiaIsValidationDone_Cfm",
+      "note": "Delay time",
+      "Value": {
+        "type": "number",
+        "container": "array",
+        "size": 2
+      },
+      "Get": {
+        "Event": {
+          "PI_command_name": "UPGRADE_GaiaIsValidationDone_RSP",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x17",
+            "gaiaUpgradeTunnel": "Upgrade_DataIndication_Notification"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 66,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT16",
+              "name": "delay time",
+              "PI_command_ID": 66,
+              "position": 1,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "Upgrade_DataIndication_Notification",
+            "parameter": [
+              {
+                "name": "otaCommand",
+                "description": "this is the tunnel for the ota commands",
+                "type": "UINT8",
+                "repitive": false
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0000",
+              "GAIA_notification_ID": "0x0C80",
+              "GAIA_error_ID": "0x0000"
+            },
+            "partition_key": "commands"
+          }
+        }
+      }
+    },
+    {
+      "name": "Upgrade_TransferComplete",
+      "note": "0x00: Proceed, 0x01: Do not proceed",
+      "Value": {
+        "type": "number",
+        "container": "plain"
+      },
+      "Get": {
+        "Event": {
+          "PI_command_name": "UPGRADE_GaiaTransferComplete",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x0B",
+            "gaiaUpgradeTunnel": "Upgrade_DataIndication_Notification"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 67,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "Upgrade_DataIndication_Notification",
+            "parameter": [
+              {
+                "name": "otaCommand",
+                "description": "this is the tunnel for the ota commands",
+                "type": "UINT8",
+                "repitive": false
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0000",
+              "GAIA_notification_ID": "0x0C80",
+              "GAIA_error_ID": "0x0000"
+            },
+            "partition_key": "commands"
+          }
+        }
+      }
+    },
+    {
+      "name": "Upgrade_Abort",
+      "send_command_timeout": 30000,
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "UPGRADE_GaiaAbort",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x07",
+            "gaiaUpgradeTunnel": "UPGRADE_VM_UpgradeControl",
+            "gaiaUpgradeTunnelStatus": "UPGRADE_VM_UpgradeControl_RSP"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 75,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter1",
+                "PI_command_ID": 816,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0C02"
+            },
+            "partition_key": "commands"
+          },
+          "tunnelStatus": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl_RSP",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter2",
+                "PI_command_ID": 817,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0D02",
+              "GAIA_notification_ID": "0x0000",
+              "GAIA_error_ID": "0x0D82"
+            },
+            "partition_key": "commands"
+          }
+        },
+        "Params": [
+          {
+            "name": "length",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "UPGRADE_GaiaAbort_RSP",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x08",
+            "gaiaUpgradeTunnel": "Upgrade_DataIndication_Notification"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 76,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "Upgrade_DataIndication_Notification",
+            "parameter": [
+              {
+                "name": "otaCommand",
+                "description": "this is the tunnel for the ota commands",
+                "type": "UINT8",
+                "repitive": false
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0000",
+              "GAIA_notification_ID": "0x0C80",
+              "GAIA_error_ID": "0x0000"
+            },
+            "partition_key": "commands"
+          }
+        },
+        "Params": [
+          {
+            "name": "length",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Upgrade_CommitCfm",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "UPGRADE_GaiaCommit_RSP",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x10",
+            "gaiaUpgradeTunnel": "UPGRADE_VM_UpgradeControl",
+            "gaiaUpgradeTunnelStatus": "UPGRADE_VM_UpgradeControl_RSP"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 71,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT8",
+              "name": "action",
+              "PI_command_ID": 71,
+              "position": 1,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter1",
+                "PI_command_ID": 816,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0C02"
+            },
+            "partition_key": "commands"
+          },
+          "tunnelStatus": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl_RSP",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter2",
+                "PI_command_ID": 817,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0D02",
+              "GAIA_notification_ID": "0x0000",
+              "GAIA_error_ID": "0x0D82"
+            },
+            "partition_key": "commands"
+          }
+        },
+        "Params": [
+          {
+            "name": "length",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "action",
+            "type": "number",
+            "container": "plain",
+            "note": "Action: 0 = proceed, 1 = rollback"
+          }
+        ]
+      },
+      "Result": {
+        "Response": "",
+        "Params": []
+      }
+    },
+    {
+      "name": "Upgrade_ErrorConfirmation",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "UPGRADE_GaiaError_RSP",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x1F",
+            "gaiaUpgradeTunnel": "UPGRADE_VM_UpgradeControl",
+            "gaiaUpgradeTunnelStatus": "UPGRADE_VM_UpgradeControl_RSP"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 74,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT16",
+              "name": "Error code",
+              "PI_command_ID": 74,
+              "position": 1,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter1",
+                "PI_command_ID": 816,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0C02"
+            },
+            "partition_key": "commands"
+          },
+          "tunnelStatus": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl_RSP",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter2",
+                "PI_command_ID": 817,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0D02",
+              "GAIA_notification_ID": "0x0000",
+              "GAIA_error_ID": "0x0D82"
+            },
+            "partition_key": "commands"
+          }
+        },
+        "Params": [
+          {
+            "name": "length",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "error_code",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": "",
+        "Params": []
+      }
+    },
+    {
+      "name": "Upgrade_GaiaConnect",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "UPGRADE_GaiaConnect",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0C00"
+          }
+        },
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "UPGRADE_GaiaConnect_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0D00",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0D80"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "Upgrade_GaiaData",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "UPGRADE_GaiaData",
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 818,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT8",
+              "name": "Number of bytes",
+              "PI_command_ID": 818,
+              "position": 1,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT8",
+              "name": "Start offset",
+              "PI_command_ID": 818,
+              "position": 2,
+              "repitive": true,
+              "description": ""
+            }
+          ],
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x04",
+            "gaiaUpgradeTunnel": "UPGRADE_VM_UpgradeControl",
+            "gaiaUpgradeTunnelStatus": "UPGRADE_VM_UpgradeControl_RSP"
+          },
+          "tunnel": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter1",
+                "PI_command_ID": 816,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0C02"
+            },
+            "partition_key": "commands"
+          },
+          "tunnelStatus": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl_RSP",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter2",
+                "PI_command_ID": 817,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0D02",
+              "GAIA_notification_ID": "0x0000",
+              "GAIA_error_ID": "0x0D82"
+            },
+            "partition_key": "commands"
+          }
+        },
+        "Params": [
+          {
+            "name": "buflen",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "moredata",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "data",
+            "type": "number",
+            "container": "array"
+          }
+        ]
+      },
+      "Result": {
+        "Response": "",
+        "Params": []
+      }
+    },
+    {
+      "name": "Upgrade_GaiaDisconnect",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "UPGRADE_GaiaDisconnect",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0C01"
+          }
+        },
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "UPGRADE_GaiaDisconnect_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0D01",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0D81"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "Upgrade_GaiaIsValidationDone",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "UPGRADE_GaiaIsValidationDone",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x16",
+            "gaiaUpgradeTunnel": "UPGRADE_VM_UpgradeControl",
+            "gaiaUpgradeTunnelStatus": "UPGRADE_VM_UpgradeControl_RSP"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 65,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter1",
+                "PI_command_ID": 816,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0C02"
+            },
+            "partition_key": "commands"
+          },
+          "tunnelStatus": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl_RSP",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter2",
+                "PI_command_ID": 817,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0D02",
+              "GAIA_notification_ID": "0x0000",
+              "GAIA_error_ID": "0x0D82"
+            },
+            "partition_key": "commands"
+          }
+        },
+        "Params": [
+          {
+            "name": "length",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": "",
+        "Params": []
+      }
+    },
+    {
+      "name": "Upgrade_GaiaStart",
+      "send_command_timeout": 6000,
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "UPGRADE_GaiaStart",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x01",
+            "gaiaUpgradeTunnel": "UPGRADE_VM_UpgradeControl",
+            "gaiaUpgradeTunnelStatus": "UPGRADE_VM_UpgradeControl_RSP"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 61,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter1",
+                "PI_command_ID": 816,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0C02"
+            },
+            "partition_key": "commands"
+          },
+          "tunnelStatus": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl_RSP",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter2",
+                "PI_command_ID": 817,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0D02",
+              "GAIA_notification_ID": "0x0000",
+              "GAIA_error_ID": "0x0D82"
+            },
+            "partition_key": "commands"
+          }
+        },
+        "Params": [
+          {
+            "name": "length",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "UPGRADE_GaiaStart_RSP",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x02",
+            "gaiaUpgradeTunnel": "Upgrade_DataIndication_Notification"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 62,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT8",
+              "name": "status",
+              "PI_command_ID": 62,
+              "position": 1,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT16",
+              "name": "battery level",
+              "PI_command_ID": 62,
+              "position": 2,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "Upgrade_DataIndication_Notification",
+            "parameter": [
+              {
+                "name": "otaCommand",
+                "description": "this is the tunnel for the ota commands",
+                "type": "UINT8",
+                "repitive": false
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0000",
+              "GAIA_notification_ID": "0x0C80",
+              "GAIA_error_ID": "0x0000"
+            },
+            "partition_key": "commands"
+          }
+        },
+        "Params": [
+          {
+            "name": "length",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "status",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "battery_level",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Upgrade_GaiaStartData",
+      "send_command_timeout": 12000,
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "UPGRADE_GaiaStartData",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x15",
+            "gaiaUpgradeTunnel": "UPGRADE_VM_UpgradeControl",
+            "gaiaUpgradeTunnelStatus": "UPGRADE_VM_UpgradeControl_RSP"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 63,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter1",
+                "PI_command_ID": 816,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0C02"
+            },
+            "partition_key": "commands"
+          },
+          "tunnelStatus": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl_RSP",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter2",
+                "PI_command_ID": 817,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0D02",
+              "GAIA_notification_ID": "0x0000",
+              "GAIA_error_ID": "0x0D82"
+            },
+            "partition_key": "commands"
+          }
+        },
+        "Params": [
+          {
+            "name": "length",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": "",
+        "Params": []
+      }
+    },
+    {
+      "name": "Upgrade_GaiaSync",
+      "retry_count": 0,
+      "send_command_timeout": 15000,
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "UPGRADE_GaiaSync",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x13",
+            "gaiaUpgradeTunnel": "UPGRADE_VM_UpgradeControl",
+            "gaiaUpgradeTunnelStatus": "UPGRADE_VM_UpgradeControl_RSP"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 59,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT32",
+              "name": "Unique upgrade file identifier",
+              "PI_command_ID": 59,
+              "position": 1,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter1",
+                "PI_command_ID": 816,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0C02"
+            },
+            "partition_key": "commands"
+          },
+          "tunnelStatus": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl_RSP",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter2",
+                "PI_command_ID": 817,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0D02",
+              "GAIA_notification_ID": "0x0000",
+              "GAIA_error_ID": "0x0D82"
+            },
+            "partition_key": "commands"
+          }
+        },
+        "Params": [
+          {
+            "name": "length",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "file_uid",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "UPGRADE_GaiaSync_RSP",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x14",
+            "gaiaUpgradeTunnel": "Upgrade_DataIndication_Notification"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 60,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT8",
+              "name": "resume point",
+              "PI_command_ID": 60,
+              "position": 1,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT32",
+              "name": "Unique upgrade file identifier",
+              "PI_command_ID": 60,
+              "position": 2,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT8",
+              "name": "protocol version",
+              "PI_command_ID": 60,
+              "position": 3,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "Upgrade_DataIndication_Notification",
+            "parameter": [
+              {
+                "name": "otaCommand",
+                "description": "this is the tunnel for the ota commands",
+                "type": "UINT8",
+                "repitive": false
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0000",
+              "GAIA_notification_ID": "0x0C80",
+              "GAIA_error_ID": "0x0000"
+            },
+            "partition_key": "commands"
+          }
+        },
+        "Params": [
+          {
+            "name": "length",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "resume_point",
+            "type": "number",
+            "container": "plain",
+            "Note": {
+              "UPGRADE_RESUME_POINT_START": 0,
+              "UPGRADE_RESUME_POINT_PRE_VALIDATE": 1,
+              "UPGRADE_RESUME_POINT_PRE_REBOOT": 2,
+              "UPGRADE_RESUME_POINT_POST_REBOOT": 3,
+              "UPGRADE_RESUME_POINT_POST_COMMIT": 5
+            }
+          },
+          {
+            "name": "file_uid",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "protocol_version",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Upgrade_ProceedToCommit",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "UPGRADE_GaiaProceedToCommit",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x0E",
+            "gaiaUpgradeTunnel": "UPGRADE_VM_UpgradeControl",
+            "gaiaUpgradeTunnelStatus": "UPGRADE_VM_UpgradeControl_RSP"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 69,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT8",
+              "name": "action",
+              "PI_command_ID": 69,
+              "position": 1,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter1",
+                "PI_command_ID": 816,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0C02"
+            },
+            "partition_key": "commands"
+          },
+          "tunnelStatus": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl_RSP",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter2",
+                "PI_command_ID": 817,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0D02",
+              "GAIA_notification_ID": "0x0000",
+              "GAIA_error_ID": "0x0D82"
+            },
+            "partition_key": "commands"
+          }
+        },
+        "Params": [
+          {
+            "name": "length",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "execute",
+            "type": "number",
+            "container": "plain",
+            "note": "Action: 0 = proceed, 1 = dont proceed"
+          }
+        ]
+      },
+      "Result": {
+        "Response": "",
+        "Params": []
+      }
+    },
+    {
+      "name": "Upgrade_TransferComplete_Trigger",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "UPGRADE_GaiaTransferComplete_RSP",
+          "gaiaUpgrade": {
+            "gaia_upgrade_id": "0x0C",
+            "gaiaUpgradeTunnel": "UPGRADE_VM_UpgradeControl",
+            "gaiaUpgradeTunnelStatus": "UPGRADE_VM_UpgradeControl_RSP"
+          },
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "length",
+              "PI_command_ID": 68,
+              "position": 0,
+              "repitive": false,
+              "description": ""
+            },
+            {
+              "type": "UINT8",
+              "name": "action",
+              "PI_command_ID": 68,
+              "position": 1,
+              "repitive": false,
+              "description": ""
+            }
+          ],
+          "tunnel": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter1",
+                "PI_command_ID": 816,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0C02"
+            },
+            "partition_key": "commands"
+          },
+          "tunnelStatus": {
+            "PI_command_name": "UPGRADE_VM_UpgradeControl_RSP",
+            "parameter": [
+              {
+                "type": "UINT8",
+                "name": "parameter2",
+                "PI_command_ID": 817,
+                "position": 0,
+                "repitive": true,
+                "description": "no description"
+              }
+            ],
+            "gaiaV3": {
+              "vendor_ID": "0x001D",
+              "GAIA_command_ID": "0x0D02",
+              "GAIA_notification_ID": "0x0000",
+              "GAIA_error_ID": "0x0D82"
+            },
+            "partition_key": "commands"
+          }
+        },
+        "Params": [
+          {
+            "name": "length",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "execute",
+            "type": "number",
+            "container": "plain",
+            "note": "Action: 0 = proceed, 1 = dont proceed"
+          }
+        ]
+      },
+      "Result": {
+        "Response": "",
+        "Params": []
+      }
+    },
+    {
+      "name": "Core_SerialNumber",
+      "Value": {
+        "type": "string"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "Core_GetSerialNumber",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0003"
+          }
+        },
+        "Response": {
+          "PI_command_name": "Core_GetSerialNumber_RSP",
+          "parameter": [
+            {
+              "type": "STRING",
+              "name": "Serial number",
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0103",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0183"
+          }
+        }
+      }
+    },
+    {
+      "name": "Service_FactoryReset",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Service_FactoryReset",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0040"
+          }
+        },
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Service_FactoryReset_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0140",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x01C0"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "Service_HWRevision",
+      "Value": {
+        "container": "array",
+        "type": "number"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "Service_GetHwRevision_TW",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1200"
+          }
+        },
+        "Response": {
+          "PI_command_name": "Service_GetHwRevision_TW_RSP",
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "hwRevision",
+              "PI_command_ID": 80,
+              "position": 0,
+              "repitive": false
+            },
+            {
+              "type": "UINT16",
+              "name": "hwRevisionJunk",
+              "PI_command_ID": 80,
+              "position": 1,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1300",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1380"
+          }
+        }
+      }
+    },
+    {
+      "name": "Service_SystemReleaseVersion",
+      "Value": {
+        "type": "number",
+        "container": "array",
+        "size": 3
+      },
+      "Set": {
+        "Command": "SERVICE_SetSystemReleaseVersion",
+        "Response": "SERVICE_SetSystemReleaseVersion_RSP"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "SERVICE_GetSystemReleaseVersion",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1201"
+          }
+        },
+        "Response": {
+          "PI_command_name": "SERVICE_GetSystemReleaseVersion_RSP",
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "Major",
+              "PI_command_ID": 100,
+              "position": 0,
+              "repitive": false
+            },
+            {
+              "type": "UINT16",
+              "name": "Minor",
+              "PI_command_ID": 100,
+              "position": 1,
+              "repitive": false
+            },
+            {
+              "type": "UINT16",
+              "name": "Patch",
+              "PI_command_ID": 100,
+              "position": 2,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1301",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1381"
+          }
+        }
+      },
+      "send_command_timeout": 10000
+    },
+    {
+      "name": "Config_SetTimer",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_SetTimerConfiguration",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "Timer number",
+              "PI_command_ID": 190,
+              "position": 0,
+              "repitive": false
+            },
+            {
+              "type": "UINT16",
+              "name": "Timer value",
+              "PI_command_ID": 190,
+              "position": 1,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0600"
+          }
+        },
+        "Params": [
+          {
+            "name": "timerID",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "timeSeconds",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_SetTimerConfiguration_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0700",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0780"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "Config_GetTimer",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_GetTimerConfiguration",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "Timer number",
+              "PI_command_ID": 192,
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0601"
+          }
+        },
+        "Params": [
+          {
+            "name": "timerID",
+            "type": "string",
+            "mapped_type": "number",
+            "map": {
+              "POWER_OFF_TIMER": 0,
+              "LIMBO_TIMEOUT": 1
+            }
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_GetTimerConfiguration_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "Timer number",
+              "PI_command_ID": 193,
+              "position": 0,
+              "repitive": false
+            },
+            {
+              "type": "UINT16",
+              "name": "Timer value",
+              "PI_command_ID": 193,
+              "position": 1,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0701",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0781"
+          }
+        },
+        "Params": [
+          {
+            "name": "timerID",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "timeSeconds",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Setting_AudioPromptMode",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "toneVoiceOff": 0,
+          "toneOn": 1,
+          "toneVoiceOn": 2
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "AudioPrompt_Mode_Set",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "PI_command_ID": 607,
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0801"
+          }
+        },
+        "Response": {
+          "PI_command_name": "AudioPrompt_Mode_SetRsp",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0901",
+            "GAIA_error_ID": "0x0981",
+            "GAIA_notification_ID": "0x0000"
+          }
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "AudioPrompt_Mode_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0802"
+          }
+        },
+        "Response": {
+          "PI_command_name": "AudioPrompt_Mode_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "PI_command_ID": 610,
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0902",
+            "GAIA_error_ID": "0x0982",
+            "GAIA_notification_ID": "0x0000"
+          }
+        }
+      }
+    },
+    {
+      "name": "AudioPrompt_GetAudioPromptsLanguageVersions",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "AudioPrompt_GetAudioPromptsLanguageVersions",
+          "parameter": [
+            {
+              "name": "side",
+              "description": "0 - main device or left earbud 1 - right earbud if exists",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0809"
+          }
+        },
+        "Params": [
+          {
+            "name": "side",
+            "type": "string",
+            "mapped_type": "number",
+            "container": "map",
+            "map": {
+              "leftEarbud": 0,
+              "rightEarbud": 1
+            }
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "AudioPrompt_GetAudioPromptsLanguageVersions_RSP",
+          "parameter": [
+            {
+              "name": "active",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": false
+            },
+            {
+              "name": "available languages",
+              "description": "param 2 to param n (as many as needed to report all available languages)  4 uint8 values: byte 0 - Language id byte 1 - VP Major version byte 2 - VP Minor version byte 3 - VP patch version",
+              "type": "UINT32",
+              "repitive": false
+            },
+            {
+              "name": "active",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": true
+            },
+            {
+              "name": "available languages",
+              "description": "param 2 to param n (as many as needed to report all available languages)  4 uint8 values: byte 0 - Language id byte 1 - VP Major version byte 2 - VP Minor version byte 3 - VP patch version",
+              "type": "UINT32",
+              "repitive": true
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0909",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0989"
+          }
+        },
+        "Params": [
+          {
+            "name": "active language",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "Language Version",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      }
+    },
+    {
+      "name": "AudioPrompt_GetAvailableAudioPromptsLanguages",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "AudioPrompt_GetAvailableAudioPromptsLanguages",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0808"
+          }
+        },
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "AudioPrompt_GetAvailableAudioPromptsLanguages_RSP",
+          "parameter": [
+            {
+              "name": "language",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": false
+            },
+            {
+              "name": "language",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": true
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0908",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0988"
+          }
+        },
+        "Params": [
+          {
+            "name": "languages",
+            "type": "number",
+            "container": "array"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Battery_ChargingStatus",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "DISCONNECTED": 0,
+          "NORMAL_CHARGING": 1,
+          "CHARGING_COMPLETE": 2
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "Battery_ChargingState_Get_TW",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0602"
+          }
+        },
+        "Response": {
+          "PI_command_name": "Battery_ChargingState_GetRsp_TW",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "left earbud",
+              "position": 0,
+              "repitive": false,
+              "description": "no description"
+            },
+            {
+              "type": "UINT8",
+              "name": "right earbud",
+              "position": 1,
+              "repitive": true,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0702",
+            "GAIA_notification_ID": "0x0682",
+            "GAIA_error_ID": "0x0782"
+          }
+        },
+        "Event": {
+          "PI_command_name": "Battery_ChargingState_GetRsp_TW",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "left earbud",
+              "position": 0,
+              "repitive": false,
+              "description": "no description"
+            },
+            {
+              "type": "UINT8",
+              "name": "right earbud",
+              "position": 1,
+              "repitive": true,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0702",
+            "GAIA_notification_ID": "0x0682",
+            "GAIA_error_ID": "0x0782"
+          }
+        }
+      }
+    },
+    {
+      "name": "Upgrade_Enable",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Upgrade_EnterDfuMode",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0200"
+          }
+        },
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Upgrade_EnterDfuMode_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0300",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0380"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "UpgradeFileSize",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Upgrade_SetUpgradeFilesize",
+          "parameter": [
+            {
+              "name": "sizeOfUpgradeFile",
+              "description": "the size of the upgrade file",
+              "type": "UINT32",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0201"
+          }
+        },
+        "Params": [
+          {
+            "name": "filesize",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Upgrade_SetUpgradeFilesize_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0301",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0381"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "UpgradeProgress",
+      "Value": {
+        "type": "number",
+        "container": "array",
+        "length": 2,
+        "note": "upgradePhase:map: { 'GAIA_UPGRADE_MODE_IDLE': 0,'GAIA_UPGRADE_READY_FOR_UPGRADE': 1,'GAIA_UPGRADE_PROGRESS_RECEIVING': 3,'GAIA_UPGRADE_PROGRESS_VALIDATING': 4,'GAIA_UPGRADE_PROGRESS_FINISHED': 5},percent: number 0-100 of current phase"
+      },
+      "Get": {
+        "Event": {
+          "PI_command_name": "Upgrade_UpgradeProgress_RSP",
+          "parameter": [
+            {
+              "name": "upgradePhase",
+              "description": "0x00: GAIA_UPGRADE_MODE_IDLE 0x01: GAIA_UPGRADE_READY_FOR_UPGRADE 0x02: GAIA_UPGRADE_PROGRESS_RECEIVING 0x03: GAIA_UPGRADE_PROGRESS_SENDING 0x04: GAIA_UPGRADE_PROGRESS_VALIDATING 0x05: GAIA_UPGRADE_PROGRESS_FINISHED",
+              "type": "UINT8",
+              "repitive": false
+            },
+            {
+              "name": "percentage",
+              "description": "upgrade percentage",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0302",
+            "GAIA_notification_ID": "0x0282",
+            "GAIA_error_ID": "0x0382"
+          }
+        }
+      }
+    },
+    {
+      "name": "Upgrade_VM_Control_Ack",
+      "Value": {
+        "type": "number",
+        "container": "plain"
+      },
+      "Get": {
+        "Event": {
+          "PI_command_name": "UPGRADE_VM_UpgradeControl_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "parameter2",
+              "PI_command_ID": 817,
+              "position": 0,
+              "repitive": true,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0D02",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0D82"
+          }
+        }
+      }
+    },
+    {
+      "name": "Battery_Percent",
+      "Value": {
+        "container": "array",
+        "type": "number"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "Battery_GetBatteryLevels",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0603"
+          }
+        },
+        "Response": {
+          "PI_command_name": "Battery_GetBatteryLevels_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "",
+              "position": 0,
+              "repitive": false,
+              "description": "no description"
+            },
+            {
+              "type": "UINT8",
+              "name": "",
+              "position": 1,
+              "repitive": true,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0703",
+            "GAIA_error_ID": "0x0783",
+            "GAIA_notification_ID": "0x0683"
+          }
+        },
+        "Event": {
+          "PI_command_name": "Battery_GetBatteryLevels_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "",
+              "position": 0,
+              "repitive": false,
+              "description": "no description"
+            },
+            {
+              "type": "UINT8",
+              "name": "",
+              "position": 1,
+              "repitive": true,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0703",
+            "GAIA_error_ID": "0x0783",
+            "GAIA_notification_ID": "0x0683"
+          }
+        }
+      },
+      "send_command_timeout": "9000"
+    },
+    {
+      "name": "PairedDevicesListSize",
+      "send_command_timeout": 9000,
+      "Value": {
+        "type": "number",
+        "container": "plain"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "DeviceList_GetPairedDeviceListSize",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1400"
+          }
+        },
+        "Response": {
+          "PI_command_name": "DeviceList_GetPairedDeviceListSize_RSP",
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "nOfEntries",
+              "PI_command_ID": 780,
+              "position": 0,
+              "repitive": false,
+              "description": "number of Entries"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1500",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1580"
+          }
+        }
+      }
+    },
+    {
+      "name": "PairedDevicesMaxBTConnections",
+      "Value": {
+        "type": "number",
+        "container": "plain"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "DeviceList_GetMaxBtConnections",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1409"
+          }
+        },
+        "Response": {
+          "PI_command_name": "DeviceList_GetMaxBtConnections_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "maxConnections",
+              "PI_command_ID": 796,
+              "position": 0,
+              "repitive": false,
+              "description": "maxConnections"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1509",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1589"
+          }
+        }
+      }
+    },
+    {
+      "name": "PairedDevicesOwnDeviceIndex",
+      "Value": {
+        "type": "number",
+        "container": "plain"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "DeviceList_GetOwnDeviceIndex",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1407"
+          }
+        },
+        "Response": {
+          "PI_command_name": "DeviceList_GetOwnDeviceIndex_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "deviceIndex",
+              "PI_command_ID": 794,
+              "position": 0,
+              "repitive": false,
+              "description": "deviceIndex"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1507",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1587"
+          }
+        }
+      }
+    },
+    {
+      "name": "PairedDevicesConnectDevice",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "DeviceList_Connect",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "deviceIndex",
+              "PI_command_ID": 783,
+              "position": 0,
+              "repitive": false,
+              "description": "deviceIndex"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1402"
+          }
+        },
+        "Params": [
+          {
+            "name": "deviceIndex",
+            "type": "number"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "DeviceList_Connect_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1502",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1582"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "PairedDevicesDeleteEntry",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "DeviceList_DeleteEntry",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "deviceIndex",
+              "PI_command_ID": 789,
+              "position": 0,
+              "repitive": false,
+              "description": "deviceIndex"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1405"
+          }
+        },
+        "Params": [
+          {
+            "name": "deviceIndex",
+            "type": "number"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "DeviceList_DeleteEntry_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "deviceIndex",
+              "PI_command_ID": 790,
+              "position": 0,
+              "repitive": false,
+              "description": "deviceIndex"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1505",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1585"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "PairedDevicesDeleteList",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "DeviceList_DeletePDL",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1406"
+          }
+        },
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "DeviceList_DeletePDL_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1506",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1586"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "PairedDevicesDisconnectDevice",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "DeviceList_Disconnect",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "deviceIndex",
+              "PI_command_ID": 785,
+              "position": 0,
+              "repitive": false,
+              "description": "deviceIndex"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1403"
+          }
+        },
+        "Params": [
+          {
+            "name": "deviceIndex",
+            "type": "number"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "DeviceList_Disconnect_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1503",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1583"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "PairedDevicesGetConnectionStatus",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "DeviceList_GetConnectionStatus",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "deviceIndex",
+              "PI_command_ID": 787,
+              "position": 0,
+              "repitive": false,
+              "description": "deviceIndex"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1404"
+          }
+        },
+        "Params": [
+          {
+            "name": "deviceIndex",
+            "type": "number"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "DeviceList_GetConnectionStatus_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "deviceIndex",
+              "PI_command_ID": 788,
+              "position": 0,
+              "repitive": false,
+              "description": "deviceIndex"
+            },
+            {
+              "type": "UINT8",
+              "name": "connectionStatus",
+              "PI_command_ID": 788,
+              "position": 1,
+              "repitive": false,
+              "description": "connectionStatus"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1504",
+            "GAIA_notification_ID": "0x1484",
+            "GAIA_error_ID": "0x1584"
+          }
+        },
+        "Params": [
+          {
+            "name": "deviceIndex",
+            "type": "number"
+          },
+          {
+            "name": "connectionStatus",
+            "type": "number"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PairedDevicesGetDeviceInfo",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "DeviceList_GetDeviceInfo",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "deviceIndex",
+              "PI_command_ID": 781,
+              "position": 0,
+              "repitive": false,
+              "description": "deviceIndex"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1401"
+          }
+        },
+        "Params": [
+          {
+            "name": "deviceIndex",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "DeviceList_GetDeviceInfo_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "deviceIndex",
+              "PI_command_ID": 782,
+              "position": 0,
+              "repitive": false,
+              "description": "no description"
+            },
+            {
+              "type": "UINT8",
+              "name": "connectionPriority",
+              "PI_command_ID": 782,
+              "position": 1,
+              "repitive": false,
+              "description": "no description"
+            },
+            {
+              "type": "UINT8",
+              "name": "connectionStatus",
+              "PI_command_ID": 782,
+              "position": 2,
+              "repitive": false,
+              "description": "no description"
+            },
+            {
+              "type": "STRING",
+              "name": "name",
+              "PI_command_ID": 782,
+              "position": 3,
+              "repitive": false,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1501",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1581"
+          }
+        },
+        "Params": [
+          {
+            "name": "deviceIndex",
+            "type": "number"
+          },
+          {
+            "name": "connectionPriority",
+            "type": "number"
+          },
+          {
+            "name": "connectionStatus",
+            "type": "number"
+          },
+          {
+            "name": "deviceName",
+            "type": "string",
+            "container": "string",
+            "size": 32
+          }
+        ]
+      }
+    },
+    {
+      "name": "Sound_CodecUsed",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "SBC": 0,
+          "AAC": 1,
+          "aptX": 2,
+          "aptX-LL": 3,
+          "MP3": 4,
+          "aptX-HD": 5,
+          "Faststream": 6,
+          "LHDC": 7,
+          "aptX adaptive": 8,
+          "aptX Lossless": 9,
+          "LC3": 10,
+          "": 255
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "System_CodecUsed_Get_TW",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0800"
+          }
+        },
+        "Response": {
+          "PI_command_name": "System_CodecUsed_GetRsp_TW",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "codec type",
+              "PI_command_ID": 574,
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0900",
+            "GAIA_error_ID": "0x0980",
+            "GAIA_notification_ID": "0x0880"
+          }
+        },
+        "Event": {
+          "PI_command_name": "System_CodecUsed_GetRsp_TW",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "codec type",
+              "PI_command_ID": 574,
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0900",
+            "GAIA_error_ID": "0x0980",
+            "GAIA_notification_ID": "0x0880"
+          }
+        }
+      }
+    },
+    {
+      "name": "FirmwareVersions",
+      "Value": {
+        "container": "array",
+        "type": "number",
+        "size": 6
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "System_Version_Get_TW",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1202"
+          }
+        },
+        "Response": {
+          "PI_command_name": "System_Version_Get_RSP",
+          "parameter": [
+            {
+              "name": "version",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": true
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1302",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1382"
+          }
+        }
+      },
+      "send_command_timeout": "9000"
+    },
+    {
+      "name": "PairedDevicesConnectionChangedEvent",
+      "Value": {
+        "type": "number",
+        "container": "array",
+        "size": 2
+      },
+      "Get": {
+        "Event": {
+          "PI_command_name": "DeviceList_GetConnectionStatus_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "deviceIndex",
+              "PI_command_ID": 788,
+              "position": 0,
+              "repitive": false,
+              "description": "deviceIndex"
+            },
+            {
+              "type": "UINT8",
+              "name": "connectionStatus",
+              "PI_command_ID": 788,
+              "position": 1,
+              "repitive": false,
+              "description": "connectionStatus"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1504",
+            "GAIA_notification_ID": "0x1484",
+            "GAIA_error_ID": "0x1584"
+          }
+        }
+      }
+    },
+    {
+      "name": "Setting_AutoLockMode",
+      "note": "To turn touch control on/off",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "OFF": 0,
+          "ON": 1
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "System_AutoLock_Set",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "PI_command_ID": 591,
+              "position": 0,
+              "repitive": false,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1606"
+          }
+        },
+        "Response": {
+          "PI_command_name": "System_AutoLock_SetRsp",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1706",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1786"
+          }
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "System_AutoLock_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1607"
+          }
+        },
+        "Response": {
+          "PI_command_name": "System_AutoLock_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "PI_command_ID": 594,
+              "position": 0,
+              "repitive": false,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1707",
+            "GAIA_notification_ID": "0x1687",
+            "GAIA_error_ID": "0x1787"
+          }
+        },
+        "Event": {
+          "PI_command_name": "System_AutoLock_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "PI_command_ID": 594,
+              "position": 0,
+              "repitive": false,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1707",
+            "GAIA_notification_ID": "0x1687",
+            "GAIA_error_ID": "0x1787"
+          }
+        }
+      }
+    },
+    {
+      "name": "IsDefaultMMIConfig",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "MMI_IsDefaultConfig",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1605"
+          }
+        },
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "MMI_IsDefaultConfig_RSP",
+          "parameter": [
+            {
+              "type": "BOOL",
+              "name": "default",
+              "PI_command_ID": 850,
+              "position": 0,
+              "repitive": false,
+              "description": "true if current config is default config else false"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1705",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1785"
+          }
+        },
+        "Params": [
+          {
+            "name": "default",
+            "type": "number",
+            "container": "plain",
+            "note": "true if current config is default one"
+          }
+        ]
+      }
+    },
+    {
+      "name": "SetMMIConfig",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "MMI_SetConfig",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "button number",
+              "PI_command_ID": 841,
+              "position": 0,
+              "repitive": false,
+              "description": "0x00 touch right earbud  0x01 touch left earbud"
+            },
+            {
+              "type": "UINT8",
+              "name": "pattern",
+              "PI_command_ID": 841,
+              "position": 1,
+              "repitive": false,
+              "description": "0x00  Repeat 0x01   1  Tap 0x02  2 Tap 0x03  3 Tap 0x04  Long Press 0x05  Long Press Release 0x06  Very Long Press 0x07  Very Long Press Release 0x08  Very Very Long Press 0x09  Very Very Long Press Release"
+            },
+            {
+              "type": "UINT8",
+              "name": "function",
+              "PI_command_ID": 841,
+              "position": 2,
+              "repitive": false,
+              "description": "0x00 none 0x01  play / pause 0x02 next song 0x03 previous song 0x04 Vol  0x05 Vol- 0x06 Transparent Hearing 0x07 Invoke VA 0x80 accept call 0x81  reject call 0xF0 - 0xFF custom controls"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1600"
+          }
+        },
+        "Params": [
+          {
+            "name": "button_number",
+            "type": "number",
+            "container": "plain",
+            "note": "0x00 touch right earbud,  0x01 touch left earbud "
+          },
+          {
+            "name": "pattern",
+            "type": "number",
+            "container": "plain",
+            "note": "0x00, Repeat 0x01, 1 Tap, 0x02 2 Tap, 0x03  3 Tap, 0x04 Long Press, 0x05  Long Press Release, 0x06  Very Long Press, 0x07  Very Long Press Release, 0x08  Very Very Long Press, 0x09  Very Very Long Press Release"
+          },
+          {
+            "name": "function",
+            "type": "number",
+            "container": "plain",
+            "note": "0x00 none, 0x01  play / pause, 0x02 next song, 0x03 previous song, 0x04 Vol , 0x05 Vol-, 0x06 Transparent Hearing, 0x07 Invoke VA, 0xF0 - 0xFF custom controls"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "MMI_SetConfig_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1700",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1780"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "SetDefaultMMIConfig",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "MMI_SetDefaultConfig",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1604"
+          }
+        },
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "MMI_SetDefaultConfig_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1704",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1784"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "GetMMIConfig",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "MMI_GetConfig",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "button number",
+              "PI_command_ID": 845,
+              "position": 0,
+              "repitive": false,
+              "description": "0x00 - 0xFF"
+            },
+            {
+              "type": "UINT8",
+              "name": "pattern",
+              "PI_command_ID": 845,
+              "position": 1,
+              "repitive": false,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1601"
+          }
+        },
+        "Params": [
+          {
+            "name": "button_number",
+            "type": "number",
+            "container": "plain",
+            "min": 0,
+            "max": 255
+          },
+          {
+            "name": "pattern",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "MMI_GetConfig_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "button number",
+              "PI_command_ID": 846,
+              "position": 0,
+              "repitive": false,
+              "description": "0x00 - 0xFF"
+            },
+            {
+              "type": "UINT8",
+              "name": "pattern",
+              "PI_command_ID": 846,
+              "position": 1,
+              "repitive": false,
+              "description": "no description"
+            },
+            {
+              "type": "UINT8",
+              "name": "function",
+              "PI_command_ID": 846,
+              "position": 2,
+              "repitive": false,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1701",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1781"
+          }
+        },
+        "Params": [
+          {
+            "name": "button_number",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "pattern",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "function",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      }
+    },
+    {
+      "name": "ANC_Status",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "OFF": 0,
+          "ON": 1
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "ANC_GetNoiseCancelation",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1A05"
+          }
+        },
+        "Response": {
+          "PI_command_name": "ANC_GetNoiseCancelation_RSP",
+          "parameter": [
+            {
+              "name": "activation",
+              "description": "0x00: off, 0x01: on",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1B05",
+            "GAIA_notification_ID": "0x1A85",
+            "GAIA_error_ID": "0x1B85"
+          }
+        },
+        "Event": {
+          "PI_command_name": "ANC_GetNoiseCancelation_RSP",
+          "parameter": [
+            {
+              "name": "activation",
+              "description": "0x00: off, 0x01: on",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1B05",
+            "GAIA_notification_ID": "0x1A85",
+            "GAIA_error_ID": "0x1B85"
+          }
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "ANC_SetNoiseCancelation",
+          "parameter": [
+            {
+              "name": "activation",
+              "description": "0x00: off, 0x01: on",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1A04"
+          }
+        },
+        "Response": {
+          "PI_command_name": "ANC_SetNoiseCancelation_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1B04",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1B84"
+          }
+        }
+      }
+    },
+    {
+      "name": "ANC",
+      "note": "[0]=ANC Mode, [1]=state,...",
+      "Value": {
+        "type": "number",
+        "container": "array",
+        "size": 6
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "ANC_GetNoiseCancelationMode",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1A01"
+          }
+        },
+        "Response": {
+          "PI_command_name": "ANC_GetNoiseCancelationMode_RSP",
+          "parameter": [
+            {
+              "name": "mode",
+              "description": "1=Anti-Wind",
+              "type": "UINT8",
+              "repitive": false,
+              "position": 0
+            },
+            {
+              "name": "state",
+              "description": "0=off; 1 = on; (2=auto)",
+              "type": "UINT8",
+              "repitive": false,
+              "position": 1
+            },
+            {
+              "name": "mode",
+              "description": "2=comfort",
+              "type": "UINT8",
+              "repitive": false,
+              "position": 2
+            },
+            {
+              "name": "state",
+              "description": "0=off; 1 = on",
+              "type": "UINT8",
+              "repitive": false,
+              "position": 3
+            },
+            {
+              "name": "mode",
+              "description": "3=adaptive",
+              "type": "UINT8",
+              "repitive": false,
+              "position": 4
+            },
+            {
+              "name": "state",
+              "description": "0=off; 1 = on",
+              "type": "UINT8",
+              "repitive": false,
+              "position": 5
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1B01",
+            "GAIA_notification_ID": "0x1A81",
+            "GAIA_error_ID": "0x1B81"
+          }
+        },
+        "Event": {
+          "PI_command_name": "ANC_GetNoiseCancelationMode_RSP",
+          "parameter": [
+            {
+              "name": "mode",
+              "description": "1=Anti-Wind",
+              "type": "UINT8",
+              "repitive": false,
+              "position": 0
+            },
+            {
+              "name": "state",
+              "description": "0=off; 1 = on; (2=auto)",
+              "type": "UINT8",
+              "repitive": false,
+              "position": 1
+            },
+            {
+              "name": "mode",
+              "description": "2=comfort",
+              "type": "UINT8",
+              "repitive": false,
+              "position": 2
+            },
+            {
+              "name": "state",
+              "description": "0=off; 1 = on",
+              "type": "UINT8",
+              "repitive": false,
+              "position": 3
+            },
+            {
+              "name": "mode",
+              "description": "3=adaptive",
+              "type": "UINT8",
+              "repitive": false,
+              "position": 4
+            },
+            {
+              "name": "state",
+              "description": "0=off; 1 = on",
+              "type": "UINT8",
+              "repitive": false,
+              "position": 5
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1B01",
+            "GAIA_notification_ID": "0x1A81",
+            "GAIA_error_ID": "0x1B81"
+          }
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "ANC_SetNoiseCancelationMode",
+          "parameter": [
+            {
+              "name": "mode",
+              "description": "1=Anti-Wind, 2=comfort, 3=adaptive",
+              "type": "UINT8",
+              "repitive": false
+            },
+            {
+              "name": "state",
+              "description": "0 = off, 1 = on, (2=auto)",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1A00"
+          }
+        },
+        "Response": {
+          "PI_command_name": "ANC_SetNoiseCancelationMode_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1B00",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1B80"
+          }
+        }
+      }
+    },
+    {
+      "name": "ANC_Transparency",
+      "Value": {
+        "container": "plain",
+        "type": "number"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "ANC_Transparency_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1A03"
+          }
+        },
+        "Response": {
+          "PI_command_name": "ANC_Transparency_Get_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "level",
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1B03",
+            "GAIA_notification_ID": "0x1A83",
+            "GAIA_error_ID": "0x1983"
+          }
+        },
+        "Event": {
+          "PI_command_name": "ANC_Transparency_Get_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "level",
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1B03",
+            "GAIA_notification_ID": "0x1A83",
+            "GAIA_error_ID": "0x1983"
+          }
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "ANC_Transparency_Set",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "level",
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1A02"
+          }
+        },
+        "Response": {
+          "PI_command_name": "ANC_Transparency_Set_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1B02",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1982"
+          }
+        }
+      }
+    },
+    {
+      "name": "TransparentHearingMode",
+      "send_command_timeout": 6000,
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "on": 1,
+          "off": 0
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "TransparentHearing_Mode_Set_TW",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "PI_command_ID": 615,
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1800"
+          }
+        },
+        "Response": {
+          "PI_command_name": "TransparentHearing_Mode_SetRsp_TW",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1900",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1980"
+          }
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "TransparentHearing_Mode_Get_TW",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1801"
+          }
+        },
+        "Response": {
+          "PI_command_name": "TransparentHearing_Mode_GetRsp_TW",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "PI_command_ID": 618,
+              "position": 0,
+              "repitive": false,
+              "description": "0x00 keep music playing, 0x01 stop music"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1901",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1981"
+          }
+        }
+      }
+    },
+    {
+      "name": "TransparentHearing_Status",
+      "Value": {
+        "container": "map",
+        "type": "string",
+        "mapped_type": "number",
+        "map": {
+          "on": 1,
+          "off": 0
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "TransparentHearing_Status_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1805"
+          }
+        },
+        "Response": {
+          "PI_command_name": "TransparentHearing_Status_Get_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "status",
+              "position": 0,
+              "repitive": false,
+              "description": "0x00: OFF, 0x01: ON"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1905",
+            "GAIA_notification_ID": "0x1885",
+            "GAIA_error_ID": "0x1985"
+          }
+        },
+        "Event": {
+          "PI_command_name": "TransparentHearing_Status_Get_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "status",
+              "position": 0,
+              "repitive": false,
+              "description": "0x00: OFF, 0x01: ON"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1905",
+            "GAIA_notification_ID": "0x1885",
+            "GAIA_error_ID": "0x1985"
+          }
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "TransparentHearing_Status_Set",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "status",
+              "position": 0,
+              "repitive": false,
+              "description": "0x00: OFF, 0x01: ON"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1804"
+          }
+        },
+        "Response": {
+          "PI_command_name": "TransparentHearing_Status_Set_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1904",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1984"
+          }
+        }
+      }
+    },
+    {
+      "name": "TransparentHearing",
+      "Value": {
+        "container": "plain",
+        "type": "number"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "TransparentHearing_Status_Get_TW",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1803"
+          }
+        },
+        "Response": {
+          "PI_command_name": "TransparentHearing_Status_GetRsp_TW",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "status",
+              "PI_command_ID": 622,
+              "position": 0,
+              "repitive": false,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1903",
+            "GAIA_notification_ID": "0x1883",
+            "GAIA_error_ID": "0x1983"
+          }
+        },
+        "Event": {
+          "PI_command_name": "TransparentHearing_Status_GetRsp_TW",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "status",
+              "PI_command_ID": 622,
+              "position": 0,
+              "repitive": false,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1903",
+            "GAIA_notification_ID": "0x1883",
+            "GAIA_error_ID": "0x1983"
+          }
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "TransparentHearing_Status_Set_TW",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "status",
+              "PI_command_ID": 619,
+              "position": 0,
+              "repitive": false,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1802"
+          }
+        },
+        "Response": {
+          "PI_command_name": "TransparentHearing_Status_SetRsp_TW",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1902",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1982"
+          }
+        }
+      }
+    },
+    {
+      "name": "RegisterNotification_qcore",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "gaiaV3 feature ID",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [0],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_qEarbud",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "gaiaV3 feature ID",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [1],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_qAudioCuration",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "gaiaV3 feature ID",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [2],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_qVoiceUI",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "gaiaV3 feature ID",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [3],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_qDebug",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "gaiaV3 feature ID",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [4],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_qDFU",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "gaiaV3 feature ID",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [6],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_core",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [0],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_genericAudio",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [4],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_userEQ",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [8],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "Versions_ModelId",
+      "Value": {
+        "type": "string"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "Versions_GetModelId",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1206"
+          }
+        },
+        "Response": {
+          "PI_command_name": "Versions_GetModelId_RSP",
+          "parameter": [
+            {
+              "type": "STRING",
+              "name": "model number string",
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x1306",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1386"
+          }
+        }
+      }
+    },
+    {
+      "name": "RegisterNotification_versions",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [9],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_deviceManagement",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [10],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_mmi",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [11],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_transparentHearing",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [12],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_ANC",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [13],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_battery",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [3],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "RegisterNotification_Device",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser",
+          "parameter": [
+            {
+              "name": "featureID",
+              "description": "no description",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0007"
+          }
+        },
+        "Additional_Values": [2],
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Config_RegisterNotification_Sennheiser_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0107",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0187"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "SidetoneState",
+      "Value": {
+        "container": "plain",
+        "type": "number"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "Sidetone_GetState",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0806"
+          }
+        },
+        "Response": {
+          "PI_command_name": "Sidetone_GetState_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "sidetone state",
+              "PI_command_ID": 840,
+              "position": 0,
+              "repitive": false,
+              "description": "SideToneLevel: uint8 [0..5]"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0906",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0986"
+          }
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "Sidetone_SetState",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "sidetone state",
+              "PI_command_ID": 837,
+              "position": 0,
+              "repitive": false,
+              "description": "SideToneLevel: uint8 [0..5]"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0805"
+          }
+        },
+        "Response": {
+          "PI_command_name": "Sidetone_SetState_RSP",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0905",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0985"
+          }
+        }
+      }
+    },
+    {
+      "name": "Setting_AutoCall",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "on": 1,
+          "off": 0
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "AutoCall_Mode_Set",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "PI_command_ID": 603,
+              "position": 0,
+              "repitive": false,
+              "description": "mode"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x080A"
+          }
+        },
+        "Response": {
+          "PI_command_name": "AutoCall_Mode_SetRsp",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x090A",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x098A"
+          }
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "AutoCall_Mode_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x080B"
+          }
+        },
+        "Response": {
+          "PI_command_name": "AutoCall_Mode_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "PI_command_ID": 606,
+              "position": 0,
+              "repitive": false,
+              "description": "mode"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x090B",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x098B"
+          }
+        }
+      }
+    },
+    {
+      "name": "Setting_OnHeadDetection",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "on": 1,
+          "off": 0
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "OnHeadDetection_Mode_Set",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "position": 0,
+              "repitive": false,
+              "description": "mode"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0400"
+          }
+        },
+        "Response": {
+          "PI_command_name": "OnHeadDetection_Mode_SetRsp",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0500",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0580"
+          }
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "OnHeadDetection_Mode_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0401"
+          }
+        },
+        "Response": {
+          "PI_command_name": "OnHeadDetection_Mode_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "position": 0,
+              "repitive": false,
+              "description": "mode"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0501",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0581"
+          }
+        }
+      }
+    },
+    {
+      "name": "Setting_ComfortCall",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "on": 1,
+          "off": 0
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "Call_Externalization_Set",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "position": 0,
+              "repitive": false,
+              "description": "mode"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0814"
+          }
+        },
+        "Response": {
+          "PI_command_name": "Call_Externalization_SetRsp",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0914",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0994"
+          }
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "Call_Externalization_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0815"
+          }
+        },
+        "Response": {
+          "PI_command_name": "Call_Externalization_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "position": 0,
+              "repitive": false,
+              "description": "mode"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0915",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0995"
+          }
+        }
+      }
+    },
+    {
+      "name": "Setting_SmartPause",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "on": 1,
+          "off": 0
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "System_AutoPause_Set",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "PI_command_ID": 595,
+              "position": 0,
+              "repitive": false,
+              "description": "mode"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x080C"
+          }
+        },
+        "Response": {
+          "PI_command_name": "System_AutoPause_SetRsp",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x090C",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x098C"
+          }
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "System_AutoPause_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x080D"
+          }
+        },
+        "Response": {
+          "PI_command_name": "System_AutoPause_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "PI_command_ID": 598,
+              "position": 0,
+              "repitive": false,
+              "description": "mode"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x090D",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x098D"
+          }
+        }
+      }
+    },
+    {
+      "name": "Primary_Side",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "BOTH": 0,
+          "LEFT": 1,
+          "RIGHT": 2
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "Development_Primary_Side",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0041"
+          }
+        },
+        "Response": {
+          "PI_command_name": "Development_Primary_Side_RSP",
+          "parameter": [
+            {
+              "name": "deviceSite",
+              "description": "0x00: both 0x01: left 0x02: right",
+              "type": "UINT8",
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0141",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x01C1"
+          }
+        }
+      },
+      "Set": {}
+    },
+    {
+      "name": "BluetoothCompatibilityMode",
+      "note": "If set, might disable some features but provide more stable BT connection or less dropout",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "betterCompatibility": 1,
+          "betterAudio": 0
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "BluetoothCompatibilityMode_Set",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "PI_command_ID": 595,
+              "position": 0,
+              "repitive": false,
+              "description": "mode"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0405"
+          }
+        },
+        "Response": {
+          "PI_command_name": "BluetoothCompatibilityMode_SetRsp",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0505",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0585"
+          }
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "BluetoothCompatibilityMode_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0406"
+          }
+        },
+        "Response": {
+          "PI_command_name": "BluetoothCompatibilityMode_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "mode",
+              "PI_command_ID": 598,
+              "position": 0,
+              "repitive": false,
+              "description": "mode"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0506",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0586"
+          }
+        }
+      }
+    },
+    {
+      "name": "VoicePrompt_Language",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "ENGLISH": 0,
+          "GERMAN": 1,
+          "FRENCH": 2,
+          "SPANISH": 3,
+          "CHINESE": 4,
+          "JAPANESE": 5,
+          "RUSSIAN": 6,
+          "KOREAN": 7
+        }
+      },
+      "Set": {
+        "Command": "AudioPrompt_CustomLanguage_Set_TW",
+        "Response": "AudioPrompt_CustomLanguage_SetRsp_TW"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "AudioPrompt_CustomLanguage_Get_TW",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0807"
+          }
+        },
+        "Response": {
+          "PI_command_name": "AudioPrompt_CustomLanguage_GetRsp_TW",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "language code",
+              "PI_command_ID": 614,
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0907",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0987"
+          }
+        }
+      }
+    },
+    {
+      "name": "PhysicalDevice_State",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "UNKNOWN": 0,
+          "IN_CASE": 1,
+          "NOT_ON_HEAD": 2,
+          "ON_HEAD": 3
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "PhysicalDevice_State_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0402"
+          }
+        },
+        "Response": {
+          "PI_command_name": "PhysicalDevice_State_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "headset or left earbud",
+              "position": 0,
+              "repitive": false,
+              "description": "no description"
+            },
+            {
+              "type": "UINT8",
+              "name": "right earbud",
+              "position": 1,
+              "repitive": false,
+              "description": "no description"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0502",
+            "GAIA_notification_ID": "0x0482",
+            "GAIA_error_ID": "0x0582"
+          }
+        },
+        "Event": {
+          "PI_command_name": "PhysicalDevice_State_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "headset or left earbud",
+              "position": 0,
+              "repitive": false
+            },
+            {
+              "type": "UINT8",
+              "name": "right earbud",
+              "position": 1,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0502",
+            "GAIA_notification_ID": "0x0482",
+            "GAIA_error_ID": "0x0582"
+          }
+        }
+      }
+    },
+    {
+      "name": "Statistics_GetAvailableCategories",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Statistics_GetAvailableCategories",
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "Last received ID",
+              "PI_command_ID": 238,
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x1800"
+          }
+        },
+        "Params": [{}]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Statistics_GetAvailableCategories_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "More Data",
+              "PI_command_ID": 239,
+              "position": 0,
+              "repitive": false
+            },
+            {
+              "type": "UINT16",
+              "name": "Category ID",
+              "PI_command_ID": 239,
+              "position": 1,
+              "repitive": true
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1980",
+            "GAIA_command_ID": "0x1900"
+          }
+        },
+        "Params": [
+          {
+            "name": "more data",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "category ids",
+            "type": "number",
+            "container": "array"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Statistics_GetAllStatisticsInCategory",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Statistics_GetAllStatisticsInCategory",
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "Category ID",
+              "PI_command_ID": 238,
+              "position": 0,
+              "repitive": false
+            },
+            {
+              "type": "UINT8",
+              "name": "Last received statistics ID",
+              "PI_command_ID": 238,
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x1801"
+          }
+        },
+        "Params": [{}, {}]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Statistics_GetAllStatisticsInCategory_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "More Data",
+              "PI_command_ID": 239,
+              "position": 0,
+              "repitive": false
+            },
+            {
+              "type": "UINT16",
+              "name": "Category ID",
+              "PI_command_ID": 239,
+              "position": 1,
+              "repitive": false
+            },
+            {
+              "type": "UINT8",
+              "name": "Statistic ID",
+              "PI_command_ID": 239,
+              "position": 2,
+              "repitive": true
+            },
+            {
+              "type": "UINT8",
+              "name": "Flags",
+              "PI_command_ID": 239,
+              "position": 3,
+              "repitive": true
+            },
+            {
+              "type": "UINT8",
+              "name": "Length of next value",
+              "PI_command_ID": 239,
+              "position": 4,
+              "repitive": true
+            },
+            {
+              "type": "UINT8",
+              "name": "Value",
+              "PI_command_ID": 239,
+              "position": 5,
+              "repitive": true
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1981",
+            "GAIA_command_ID": "0x1901"
+          }
+        },
+        "Params": [
+          {
+            "name": "more data",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "category id",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "data",
+            "type": "number",
+            "container": "array"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Statistics_GetStatisticsValues",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Statistics_GetStatisticsValues",
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "Category ID",
+              "PI_command_ID": 238,
+              "position": 0,
+              "repitive": false
+            },
+            {
+              "type": "UINT8",
+              "name": "statistics ID",
+              "PI_command_ID": 238,
+              "position": 0,
+              "repitive": false
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x1802"
+          }
+        },
+        "Params": [{}, {}]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Statistics_GetStatisticsValues_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "Request fulfilled",
+              "PI_command_ID": 239,
+              "position": 0,
+              "repitive": false
+            },
+            {
+              "type": "UINT16",
+              "name": "Category ID",
+              "PI_command_ID": 238,
+              "position": 1,
+              "repitive": true
+            },
+            {
+              "type": "UINT8",
+              "name": "Statistic ID",
+              "PI_command_ID": 239,
+              "position": 2,
+              "repitive": true
+            },
+            {
+              "type": "UINT8",
+              "name": "Flags",
+              "PI_command_ID": 239,
+              "position": 3,
+              "repitive": true
+            },
+            {
+              "type": "UINT8",
+              "name": "Length of value",
+              "PI_command_ID": 239,
+              "position": 4,
+              "repitive": true
+            },
+            {
+              "type": "UINT8",
+              "name": "Value",
+              "PI_command_ID": 239,
+              "position": 5,
+              "repitive": true
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x1982",
+            "GAIA_command_ID": "0x1902"
+          }
+        },
+        "Params": [
+          {
+            "name": "request fulfilled",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "data",
+            "type": "number",
+            "container": "array"
+          }
+        ]
+      }
+    },
+    {
+      "name": "VoiceUI_Selected_Assistant",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "NONE": 0,
+          "GOOGLE": 2,
+          "AMAZON": 3
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "VoiceUI_Selected_Assistant_Set",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "provider",
+              "position": 0,
+              "repitive": false,
+              "description": "provider"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0601"
+          }
+        },
+        "Response": {
+          "PI_command_name": "VoiceUI_Selected_Assistant_SetRsp",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0701",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0781"
+          }
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "VoiceUI_Selected_Assistant_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0600"
+          }
+        },
+        "Response": {
+          "PI_command_name": "VoiceUI_Selected_Assistant_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "provider",
+              "position": 0,
+              "repitive": false,
+              "description": "provider"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0700",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0780"
+          }
+        }
+      }
+    },
+    {
+      "name": "VoiceUI_Supported_Assistants",
+      "Value": {
+        "type": "number",
+        "container": "array"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "VoiceUI_Supported_Assistants_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0602"
+          }
+        },
+        "Response": {
+          "PI_command_name": "VoiceUI_Supported_Assistants_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "number of supported assistants",
+              "position": 0,
+              "repitive": false,
+              "description": "number of supported assistants"
+            },
+            {
+              "type": "UINT8",
+              "name": "assistant identifier",
+              "position": 1,
+              "repitive": true,
+              "description": "assistant identifier"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0702",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0782"
+          }
+        }
+      }
+    },
+    {
+      "name": "LowLatencyMode",
+      "Value": {
+        "type": "string",
+        "mapped_type": "number",
+        "container": "map",
+        "map": {
+          "OFF": 0,
+          "ON": 1
+        }
+      },
+      "Set": {
+        "Command": {
+          "PI_command_name": "LowLatencyMode_Set",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "LowLatencymode",
+              "position": 0,
+              "repitive": false,
+              "description": "LowLatencymode"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0817"
+          }
+        },
+        "Response": {
+          "PI_command_name": "LowLatencyMode_SetRsp",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0917",
+            "GAIA_notification_ID": "0x0000",
+            "GAIA_error_ID": "0x0997"
+          }
+        }
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "LowLatencyMode_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0818"
+          }
+        },
+        "Response": {
+          "PI_command_name": "LowLatencyMode_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "LowLatencymode",
+              "position": 0,
+              "repitive": false,
+              "description": "LowLatencymode"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0918",
+            "GAIA_notification_ID": "0x0898",
+            "GAIA_error_ID": "0x0998"
+          }
+        },
+        "Event": {
+          "PI_command_name": "LowLatencyMode_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "LowLatencymode",
+              "position": 0,
+              "repitive": false,
+              "description": "LowLatencymode"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x0495",
+            "GAIA_command_ID": "0x0918",
+            "GAIA_notification_ID": "0x0898",
+            "GAIA_error_ID": "0x0998"
+          }
+        }
+      }
+    },
+    {
+      "name": "Debug_GetPanicLogInfo",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Debug_GetPanicLogInfo",
+          "parameter": [],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0803",
+            "GAIA_error_ID": "0x0983"
+          }
+        },
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Debug_GetPanicLogInfo_RSP",
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "sessionId",
+              "position": 0,
+              "repitive": false,
+              "description": "Session ID"
+            },
+            {
+              "type": "UINT32",
+              "name": "sizeInBytes",
+              "position": 1,
+              "repitive": false,
+              "description": "Size in bytes"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_error_ID": "0x0983",
+            "GAIA_command_ID": "0x0903"
+          }
+        },
+        "Params": [
+          {
+            "name": "sessionId",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "sizeInBytes",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Core_DataTransferSetup",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Core_DataTransferSetup",
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "sessionId",
+              "position": 0,
+              "repitive": false,
+              "description": "Session ID"
+            },
+            {
+              "type": "UINT8",
+              "name": "transportType",
+              "position": 1,
+              "repitive": false,
+              "description": "Transport Type"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0009",
+            "GAIA_error_ID": "0x0189"
+          }
+        },
+        "Params": [
+          {
+            "name": "sessionId",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "transportType",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Core_DataTransferSetup_RSP",
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "sessionId",
+              "position": 0,
+              "repitive": false,
+              "description": "Session ID"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_error_ID": "0x0189",
+            "GAIA_command_ID": "0x0109"
+          }
+        },
+        "Params": [
+          {
+            "name": "sessionId",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Core_DataTransferGet",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Core_DataTransferGet",
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "sessionId",
+              "position": 0,
+              "repitive": false,
+              "description": "Session ID"
+            },
+            {
+              "type": "UINT32",
+              "name": "startOffset",
+              "position": 1,
+              "repitive": false,
+              "description": "Start Offset"
+            },
+            {
+              "type": "UINT32",
+              "name": "dataSize",
+              "position": 2,
+              "repitive": false,
+              "description": "Data Size"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x000A",
+            "GAIA_error_ID": "0x018A"
+          }
+        },
+        "Params": [
+          {
+            "name": "sessionId",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "startOffset",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "dataSize",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Core_DataTransferGet_RSP",
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "sessionId",
+              "position": 0,
+              "repitive": false,
+              "description": "Session ID"
+            },
+            {
+              "type": "UINT8",
+              "name": "data",
+              "position": 1,
+              "repitive": true,
+              "description": "Data"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_error_ID": "0x018A",
+            "GAIA_command_ID": "0x010A"
+          }
+        },
+        "Params": [
+          {
+            "name": "sessionId",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "data",
+            "type": "number",
+            "container": "array"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Core_GetTransportInfo",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Core_GetTransportInfo",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "transportKey",
+              "position": 0,
+              "repitive": false,
+              "description": "Transport Key"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x000C",
+            "GAIA_error_ID": "0x018C"
+          }
+        },
+        "Params": [
+          {
+            "name": "transportKey",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Core_GetTransportInfo_RSP",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "transportKey",
+              "position": 0,
+              "repitive": false,
+              "description": "Transport Key"
+            },
+            {
+              "type": "UINT32",
+              "name": "requestedValue",
+              "position": 1,
+              "repitive": false,
+              "description": "Requested Value"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_error_ID": "0x018C",
+            "GAIA_command_ID": "0x010C"
+          }
+        },
+        "Params": [
+          {
+            "name": "transportKey",
+            "type": "number",
+            "container": "plain"
+          },
+          {
+            "name": "requestedValue",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Debug_ErasePanicLog",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Debug_ErasePanicLog",
+          "parameter": [
+            {
+              "type": "UINT16",
+              "name": "payloadWord",
+              "position": 0,
+              "repitive": false,
+              "description": "Payload word, reserved for later usage (Default: zero)"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0804",
+            "GAIA_error_ID": "0x0984"
+          }
+        },
+        "Params": [
+          {
+            "name": "payloadWord",
+            "type": "number",
+            "container": "plain"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Debug_ErasePanicLog_RSP",
+          "parameter": [],
+          "gaiaV3": {
+            "vendor_ID": "0x001D",
+            "GAIA_command_ID": "0x0904",
+            "GAIA_error_ID": "0x0984"
+          }
+        },
+        "Params": []
+      }
+    },
+    {
+      "name": "Core_Api_Version",
+      "Value": {
+        "type": "number",
+        "container": "array",
+        "size": 2,
+        "note": "[GAIA version major, GAIA version minor]"
+      },
+      "Get": {
+        "Command": {
+          "PI_command_name": "Core_Api_Version_Get",
+          "gaiaV3": {
+            "vendor_ID": "0x001d",
+            "GAIA_command_ID": "0x0000"
+          }
+        },
+        "Response": {
+          "PI_command_name": "Core_Api_Version_GetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "GAIA version major",
+              "position": 0
+            },
+            {
+              "type": "UINT8",
+              "name": "GAIA version minor",
+              "position": 1
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001d",
+            "GAIA_command_ID": "0x0100",
+            "GAIA_error_ID": "0x0180"
+          }
+        }
+      }
+    },
+    {
+      "name": "Core_GetSupportedFeatures",
+      "note": "FromVersion:1",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Core_GetSupportedFeatures_Get",
+          "parameter": [],
+          "gaiaV3": {
+            "vendor_ID": "0x001d",
+            "GAIA_command_ID": "0x0001"
+          }
+        },
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Core_GetSupportedFeatures_GetRsp",
+          "parameter": [
+            {
+              "name": "moredata",
+              "type": "UINT8",
+              "position": 0,
+              "repitive": false
+            },
+            {
+              "name": "features",
+              "type": "UINT8",
+              "position": 1,
+              "repitive": true,
+              "description": "featureID followed by feature Version byte"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001d",
+            "GAIA_command_ID": "0x0101",
+            "GAIA_error_ID": "0x0181"
+          }
+        },
+        "Params": [
+          {
+            "name": "moredata",
+            "type": "number"
+          },
+          {
+            "name": "features",
+            "type": "number",
+            "container": "array"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Core_GetSupportedFeaturesNext",
+      "note": "FromVersion:2",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Core_GetSupportedFeaturesNext_Get",
+          "parameter": [],
+          "gaiaV3": {
+            "vendor_ID": "0x001d",
+            "GAIA_command_ID": "0x0002"
+          }
+        },
+        "Params": []
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Core_GetSupportedFeaturesNext_GetRsp",
+          "parameter": [
+            {
+              "name": "moredata",
+              "type": "UINT8",
+              "position": 0,
+              "repitive": false
+            },
+            {
+              "name": "features",
+              "type": "UINT8",
+              "position": 1,
+              "repitive": true,
+              "description": "featureID followed by feature Version byte"
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001d",
+            "GAIA_command_ID": "0x0102",
+            "GAIA_error_ID": "0x0182"
+          }
+        },
+        "Params": [
+          {
+            "name": "moredata",
+            "type": "number"
+          },
+          {
+            "name": "features",
+            "type": "number",
+            "container": "array"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Core_SetTransportParameter",
+      "note": "FromVersion:2",
+      "Invocation": {
+        "Command": {
+          "PI_command_name": "Core_SetTransportParameter_Set",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "transportKey",
+              "position": 0
+            },
+            {
+              "type": "UINT32",
+              "name": "value",
+              "position": 1
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001d",
+            "GAIA_command_ID": "0x000d"
+          }
+        },
+        "Params": [
+          {
+            "name": "transportKey",
+            "type": "number"
+          },
+          {
+            "name": "value",
+            "type": "number"
+          }
+        ]
+      },
+      "Result": {
+        "Response": {
+          "PI_command_name": "Core_SetTransportParameter_SetRsp",
+          "parameter": [
+            {
+              "type": "UINT8",
+              "name": "transportKey",
+              "position": 0
+            },
+            {
+              "type": "UINT32",
+              "name": "value",
+              "position": 1
+            }
+          ],
+          "gaiaV3": {
+            "vendor_ID": "0x001d",
+            "GAIA_command_ID": "0x010d",
+            "GAIA_error_ID": "0x018d"
+          }
+        },
+        "Params": [
+          {
+            "name": "transportKey",
+            "type": "number"
+          },
+          {
+            "name": "value",
+            "type": "number"
+          }
+        ]
+      }
+    }
+  ],
+  "parameters": [
+    { "articleNumber": "509266" },
+    { "updateTimeBleSinglePartition": 20 },
+    { "updateTimeClassicSinglePartition": 20 },
+    { "updateDeviceMinBatteryLevel": 20 },
+    { "updateDeviceBatteryIndexes": [0] },
+    { "updateWaitBeforeReconnect": 10000 },
+    { "updateRebootTimeout": 60000 },
+    { "updateAutoReconnect": true },
+    { "updateMaxPDU": 134 },
+    { "updateUseProgressFromDevice": false },
+    { "pairedDevicesManagementStartIndex": 0 },
+    { "pairedDevicesDisconnectOwnDevice": true },
+    { "voicePromptMinFwVersion": "2.6.12" },
+    { "customizableControlsMinFwVersion": "2.12.0" },
+    { "autoAnswerCallsMinFwVersion": "2.13.28" },
+    { "onHeadDetectionMinFwVersion": "2.6.3" },
+    { "renameDeviceMinFwVersion": "99.99.99" },
+    { "bluetoothCompatibilityModeMinFwVersion": "2.12.0" },
+    {
+      "factoryResetDetails": {
+        "needsDeleteBonding": true,
+        "needsResetOverlay": true
+      }
+    },
+    { "PhysicalDevice_StateMinFwVersion": "2.12.0" },
+    { "statistics_MinFwVersion": "2.12.0" },
+    { "voiceAssistant_MinFwVersion": "99.99.99" },
+    { "LowLatencyMode_MinFwVersion": "99.99.99" },
+    { "Eq5Band_Gen1_MinFwVersion": "2.12.0" }
+  ]
+}

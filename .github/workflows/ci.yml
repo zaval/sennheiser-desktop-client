@@ -25,6 +25,7 @@ jobs:
           arch: 'linux_gcc_64'
           modules: 'qtconnectivity'
           dir: '${{ github.workspace }}/qt/'
+          cache: true
 
       - name: Configure CMake
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="--coverage"
@@ -33,16 +34,19 @@ jobs:
         run: cmake --build build -- -j $(nproc)
 
       - name: Run tests
-        run: QT_QPA_PLATFORM=offscreen ctest --test-dir build --output-on-failure
+        run: QT_QPA_PLATFORM=offscreen ctest --test-dir build --output-on-failure --extra-verbose
 
       - name: Generate coverage report
         run: |
           lcov --capture --directory build --output-file coverage.info
           lcov --remove coverage.info '/usr/*' --output-file coverage.info
+          lcov --remove coverage.info '*/Qt/6.8.0/*' --output-file coverage.info
+          lcov --remove coverage.info '*/build/*' --output-file coverage.info
           lcov --list coverage.info
+          genhtml -o coverage_html coverage.info
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: coverage.info
+          path: coverage_html

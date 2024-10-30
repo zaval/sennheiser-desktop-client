@@ -16,7 +16,7 @@ jobs:
       - name: Set up Qt
         uses: jurplel/install-qt-action@v2
         with:
-          version: '6.8.0'
+          version: '6.7.3'
           modules: 'qtbase,qtquickcontrols2,qtdeclarative,qttools,qtconnectivity'
 
       - name: Install CMake

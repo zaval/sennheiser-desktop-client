@@ -12,7 +12,7 @@ set(GAIAPropertyManager_SRC
 
 add_custom_command(
         OUTPUT ${GAIAPropertyClasses_SRC}
-        COMMAND ${Python_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/scripts/property_creator.py
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/scripts/property_creator.py
             -i ${CMAKE_CURRENT_SOURCE_DIR}/m4.json
             -o ${CMAKE_CURRENT_SOURCE_DIR}/GAIAPropertyClasses
         DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/m4.json ${CMAKE_CURRENT_SOURCE_DIR}/scripts/property_creator.py
@@ -21,7 +21,7 @@ add_custom_command(
 
 add_custom_command(
         OUTPUT ${GAIAPropertyManager_SRC}
-        COMMAND ${Python_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/scripts/property_manager_creator.py
+        COMMAND ${Python3_EXECUTABLE} ${CMAKE_CURRENT_SOURCE_DIR}/scripts/property_manager_creator.py
             -i ${CMAKE_CURRENT_SOURCE_DIR}/m4.json
             -o ${CMAKE_CURRENT_SOURCE_DIR}/GAIAPropertyManager
         DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/m4.json ${CMAKE_CURRENT_SOURCE_DIR}/scripts/property_manager_creator.py

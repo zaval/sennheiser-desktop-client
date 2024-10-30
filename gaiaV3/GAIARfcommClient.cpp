@@ -153,17 +153,6 @@ QString GAIARfcommClient::getDeviceAddress() const {
     return m_deviceAddress.toString();
 }
 
-GAIARfcommClient::GAIARfcommClient(QBluetoothSocket *socket) : QObject(nullptr),
-//   socket(socket),
-   socket(new BluetoothSocketWrapper(nullptr)),
-   m_isConnected(false),
-   isSecondaryConnection(false),
-   m_deviceAddress{},
-   propertyManager(new GAIAPropertyManager(this)),
-   deviceName("")
-{
-//    connect(propertyManager, &GAIAPropertyManagerBase::propertyAdded, this, &GAIARfcommClient::propertyManagerAdded);
-}
 
 //#ifdef Q_OS_APPLE
 //void GAIARfcommClient::setServiceInfo(const QBluetoothServiceInfo &si) {

@@ -18,10 +18,16 @@ public:
     void connectToService(const QBluetoothAddress &address, quint16 port, QIODevice::OpenMode openMode = QIODevice::ReadWrite);
     qint64 write(const QByteArray &data);
 
-
-private:
+protected:
     QBluetoothSocket *m_socket;
     bool isDemo;
+
+    BluetoothSocketWrapper(QBluetoothSocket *socket);
+
+private:
+
+    void prepareData();
+
 
     QMap<QByteArray, QByteArray> m_dataMap;
     QQueue<QByteArray> m_queue;

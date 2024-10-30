@@ -1,4 +1,4 @@
-name: CI
+name: Tests
 
 on:
   push:
@@ -11,19 +11,20 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get update && apt-get install -y 7zip cmake libicu-dev lcov
 
       - name: Set up Qt
-        uses: jurplel/install-qt-action@v2
+        uses: jurplel/install-qt-action@v4
         with:
-          version: '6.7.3'
-          modules: 'qtbase,qtquickcontrols2,qtdeclarative,qttools,qtconnectivity'
-
-      - name: Install CMake
-        run: sudo apt-get install -y cmake
-
-      - name: Create build directory
-        run: mkdir build
+          version: '6.8.0'
+          host: 'linux'
+          target: 'desktop'
+          arch: 'linux_gcc_64'
+          modules: 'qtconnectivity'
+          dir: '${{ github.workspace }}/qt/'
 
       - name: Configure CMake
         run: cmake -S . -B build -DCMAKE_BUILD_TYPE=Debug -DCMAKE_CXX_FLAGS="--coverage"
@@ -32,7 +33,7 @@ jobs:
         run: cmake --build build -- -j $(nproc)
 
       - name: Run tests
-        run: ctest --test-dir build --output-on-failure
+        run: QT_QPA_PLATFORM=offscreen ctest --test-dir build --output-on-failure
 
       - name: Generate coverage report
         run: |

@@ -15,13 +15,8 @@ Page {
     Layout.fillWidth: true
     Layout.fillHeight: true
 
-    Component.onCompleted: {
-        // popup.open();
-        if (permission.status === Qt.PermissionStatus.Undetermined)
-            permission.request();
-        else if (permission.status === Qt.PermissionStatus.Granted)
-            bluetoothHandler.startDeviceDiscovery();
-
+    function loadDevices(){
+        listModel.clear();
         DB.execute( 'SELECT * FROM devices;', (result) => {
             for (let i = 0; i < result.rows.length; i++) {
                 listModel.append(
@@ -34,6 +29,16 @@ Page {
                 );
             }
         });
+    }
+
+    Component.onCompleted: {
+        // popup.open();
+        if (permission.status === Qt.PermissionStatus.Undetermined)
+            permission.request();
+        else if (permission.status === Qt.PermissionStatus.Granted)
+            bluetoothHandler.startDeviceDiscovery();
+
+        loadDevices();
     }
 
     Item {

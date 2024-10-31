@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
+import Qt5Compat.GraphicalEffects
 
 Rectangle {
     id: root
@@ -25,12 +26,25 @@ Rectangle {
         anchors.bottomMargin: 10
 
         spacing: 15
-        Image {
-            id: headphones
-            source: "qrc:/icons/headphones.svg"
+        Item {
             Layout.fillHeight: true
-            fillMode: Image.PreserveAspectFit
+            Layout.preferredWidth: 30
+            Image {
+                id: headphones
+                anchors.fill: parent
+                source: "qrc:/icons/headphones.svg"
+                fillMode: Image.PreserveAspectFit
+            }
+            Colorize {
+                visible: !UiHelper.isDarkTheme
+                anchors.fill: headphones
+                source: headphones
+                hue: .0
+                saturation: 0
+                lightness:  -1
+            }
         }
+
 
         ColumnLayout {
             id: columnLayout
@@ -54,8 +68,6 @@ Rectangle {
             }
 
         }
-
-
 
         Item {
             Layout.fillWidth: true

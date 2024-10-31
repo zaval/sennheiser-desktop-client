@@ -1,9 +1,3 @@
-#qt_add_library(btuicontrols)
-
-set_source_files_properties(AppSettings.qml PROPERTIES
-        QT_QML_SINGLETON_TYPE TRUE
-)
-
 set_source_files_properties(UiHelper.qml PROPERTIES
         QT_QML_SINGLETON_TYPE TRUE
 )
@@ -13,9 +7,7 @@ qt_add_qml_module(
         URI btuicontrols
         VERSION 1.0
         QML_FILES
-            ConnectPage.qml
             DevicePage.qml
-            AppSettings.qml
             DeviceInfoCard.qml
             ConnectedDevicesCard.qml
             FoundDeviceCard.qml
@@ -25,6 +17,8 @@ qt_add_qml_module(
             Database.js
             CallSettingsCard.qml
             OnHeadSettingsCard.qml
+            SettingsDialog.qml
+            AboutDialog.qml
         SOURCES
             BluetoothHandler.cpp
             BluetoothHandler.h

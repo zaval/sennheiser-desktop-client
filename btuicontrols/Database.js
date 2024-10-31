@@ -13,7 +13,7 @@ function getDB(){
     return db;
 }
 
-function execute(query, callback){
+function execute(query, callback = undefined){
     const db = getDB();
     db.transaction((tx) => {
         let result = tx.executeSql(query);

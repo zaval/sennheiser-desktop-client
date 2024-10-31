@@ -22,7 +22,6 @@ GAIAPropertyBase *GAIAPropertyManagerBase::getProperty(const QByteArray &vendorC
     auto property = getPropertyFromVendorCommand(vendorId, commandId);
 
     if (property != nullptr){
-        qDebug() << "getPropertyFromVendorCommand" << property;
         m_properties.insert(mapKey, property);
         if (notify)
             Q_EMIT propertyAdded(vendorCommand);

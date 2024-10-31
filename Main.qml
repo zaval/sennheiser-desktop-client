@@ -3,19 +3,17 @@ import QtQuick
 import btuicontrols
 import gaiaV3
 
-
+import QtCore
 import QtQuick.Layouts
 
 import QtQuick
-// import QtCore
 
 ApplicationWindow {
     id: mainWindow
     width: 1000
     height: 600
-    title: qsTr("Smart Control Desktop")
+    title: "Smart Control Desktop"
     visible: true
-
 
     header: ToolBar {
         height: 30
@@ -36,7 +34,7 @@ ApplicationWindow {
                 flat: true
                 icon.source: "qrc:/icons/gearshape.svg"
                 icon.color: mainWindow.palette.windowText
-                // onClicked: stackView.currentIndex -= 1;
+                onClicked: settingsDialog.open();
             }
             ToolButton {
                 flat: true
@@ -50,7 +48,7 @@ ApplicationWindow {
 
     Connections {
         target: GAIARfcommClient
-        onIsConnectedChanged: {
+        function onIsConnectedChanged(){
             stackView.currentIndex = GAIARfcommClient.isConnected ? 1 : 0;
         }
     }
@@ -70,7 +68,6 @@ ApplicationWindow {
                 pageLoader.source = "";
                 deviceListPage.bluetoothHandler.deviceAddress = "00:00:00:00:00:00";
             }
-
         }
 
         DeviceListPage{
@@ -81,109 +78,20 @@ ApplicationWindow {
         }
     }
 
-
-    Dialog {
+    AboutDialog {
         id: aboutDialog
-        anchors.centerIn: parent
-        closePolicy: Popup.CloseOnEscape | Popup.CloseOnPressOutsideParent
-        focus: true
-        width: 350
-        height: 250
-        standardButtons: Dialog.Close
-        modal: true
-        Overlay.modal: Rectangle {
-            // color: Qt.transparent(mainWindow.palette.window, 0.1)
-            color: "#55888888"
+    }
+    SettingsDialog {
+        id: settingsDialog
+        onClosed: {
+            deviceListPage.loadDevices();
         }
+    }
 
-        enter: Transition {
-            NumberAnimation {
-                from: 0.0
-                property: "opacity"
-                to: 1.0
-            }
-        }
-        exit: Transition {
-            NumberAnimation {
-                from: 1.0
-                property: "opacity"
-                to: 0.0
-            }
-        }
-
-        title: "About"
-
-        Rectangle {
-            id: root
-            anchors.fill: parent
-            color: root.palette.window
-            clip: true
-
-            RowLayout {
-                id: rowLayout
-                anchors.fill: parent
-                anchors.leftMargin: 20
-                anchors.rightMargin: 20
-                anchors.topMargin: 20
-                anchors.bottomMargin: 20
-                spacing: 20
-
-
-
-                ColumnLayout {
-                    Layout.fillHeight: true
-                    Image {
-                        id: appicon
-                        sourceSize.height: 75
-                        sourceSize.width: 75
-                        source: "qrc:/appicon.png"
-                        fillMode: Image.PreserveAspectFit
-                    }
-                    Item {
-                        Layout.fillHeight: true
-                    }
-                }
-                ColumnLayout {
-                    Layout.fillWidth: true
-                    Label {
-                        color: root.palette.windowText
-                        text: "Smart Desktop Client"
-                        font.bold: true
-                        font.pointSize: 16
-                    }
-                    Label {
-                        Layout.fillWidth: true
-                        color: root.palette.windowText
-                        wrapMode: Text.WordWrap
-                        text: `${projectDescription}`
-                    }
-                    Label {
-                        color: root.palette.windowText
-                        text: `version: ${projectVersionMajor}.${projectVersionMinor}.${projectVersionPatch}`
-                    }
-                    Label {
-                        color: root.palette.windowText
-                        text: "author: Dmytrii Zavalnyi"
-                    }
-                    Label {
-                        textFormat: Text.RichText
-                        color: root.palette.windowText
-                        text: `<a href="${projectUrl}">${projectUrl}</a>`
-                        onLinkActivated: {
-                            Qt.openUrlExternally(projectUrl);
-                        }
-                    }
-
-                    Item {
-                        Layout.fillHeight: true
-                    }
-
-                }
-                Item {
-                    Layout.fillWidth: true
-                }
-            }
-        }
-
+    Settings {
+        property alias x: mainWindow.x
+        property alias y: mainWindow.y
+        property alias width: mainWindow.width
+        property alias height: mainWindow.height
     }
 }

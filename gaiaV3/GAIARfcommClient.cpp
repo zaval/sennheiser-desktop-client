@@ -100,22 +100,24 @@ QList<QByteArray> GAIARfcommClient::packetSplitter(const QByteArray &data) const
 
 void GAIARfcommClient::socketReadyRead() {
     const auto &dataAll = socket->readAll();
-    qDebug() << "[SOCKET] << " << dataAll;
     if (dataAll.length() < 6){
+        qDebug() << "[SOCKET] << " << dataAll;
         return;
     }
 
     const auto packets = packetSplitter(dataAll);
 
-    std::for_each(packets.begin(), packets.end(), [this](const QByteArray &data){
+    for (const auto &data: packets){
         const auto vendorCommand = data.mid(4, 4);
         auto property = propertyManager->getProperty(vendorCommand);
 
-//        qDebug() << property;
         if (property != nullptr){
+            qDebug() << "[SOCKET] << " << dataAll << " -> " << property;
             property->parse(data);
+        } else {
+            qDebug() << "[SOCKET] << " << dataAll << " -> {Unknown}";
         }
-    });
+    }
 
 }
 

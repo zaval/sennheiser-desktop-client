@@ -1,7 +1,3 @@
-//
-// Created by Dmytrii Zavalnyi on 29.10.2024..
-//
-
 #include "OnHeadSettingsCardHelper.h"
 #include "gaiaV3/GAIARfcommClient.h"
 

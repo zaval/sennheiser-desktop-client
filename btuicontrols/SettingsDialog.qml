@@ -3,7 +3,6 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtCore
 import QtQuick.LocalStorage
-import "Database.js" as DB
 
 Dialog {
     id: root
@@ -38,14 +37,14 @@ Dialog {
 
     function updateDemoDevice(){
         if (demoSwitch.checked){
-            DB.execute("select * from devices where address = '11:11:11:11:11:11';", (res) => {
+            db.execute("select * from devices where address = '11:11:11:11:11:11';", (res) => {
                 if (res.rows.length === 0){
-                    DB.execute("insert into devices (name, address, uuid) values ('Demo Device', '11:11:11:11:11:11', '1111');")
+                    db.execute("insert into devices (name, address, uuid) values ('Demo Device', '11:11:11:11:11:11', '1111');")
                 }
             });
 
         } else {
-            DB.execute("delete from devices where address = '11:11:11:11:11:11';");
+            db.execute("delete from devices where address = '11:11:11:11:11:11';");
         }
     }
 
@@ -101,5 +100,8 @@ Dialog {
         id: settings
         property alias demoDevice: demoSwitch.checked
         property alias saveDebug: debugSwitch.checked
+    }
+    DatabaseStorage {
+        id: db
     }
 }

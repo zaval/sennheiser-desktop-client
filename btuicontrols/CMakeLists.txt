@@ -14,11 +14,11 @@ qt_add_qml_module(
             DeviceListPage.qml
             ANCCard2.qml
             UiHelper.qml
-            Database.js
             CallSettingsCard.qml
             OnHeadSettingsCard.qml
             SettingsDialog.qml
             AboutDialog.qml
+            DatabaseStorage.qml
         SOURCES
             BluetoothHandler.cpp
             BluetoothHandler.h

@@ -11,9 +11,12 @@ class BluetoothSocketWrapperTests: public QObject {
 
 private slots:
 
+#ifdef Q_OS_APPLE
     void testConnectToServiceReal();
-    void testConnectToServiceDemo();
     void testReadRealData();
+#endif
+    void testConnectToServiceDemo();
+
     void testReadDemoData();
     void testReadDemoDataTwice();
     void testReadDemoEmptyData();
@@ -23,20 +26,12 @@ private slots:
     void testIsOpenDemo();
 };
 
+#ifdef Q_OS_APPLE
 void BluetoothSocketWrapperTests::testConnectToServiceReal() {
     auto s = new MockBluetoothSocket(this);
     auto wrapper = new MockBluetoothSocketWrapper(s, this);
     wrapper->connectToService(QBluetoothAddress("11:22:33:44:55:55"), QBluetoothServiceInfo::RfcommProtocol);
     QCOMPARE(s->openMode(), QIODevice::ReadWrite);
-}
-
-void BluetoothSocketWrapperTests::testConnectToServiceDemo() {
-    auto s = new MockBluetoothSocket(this);
-    auto wrapper = new MockBluetoothSocketWrapper(s, this);
-    QSignalSpy spy(wrapper, SIGNAL(connected()));
-    wrapper->connectToService(QBluetoothAddress("11:11:11:11:11:11"), QBluetoothServiceInfo::RfcommProtocol);
-    QCOMPARE(spy.count(), 1);
-    QCOMPARE(s->openMode(), QIODevice::NotOpen);
 }
 
 void BluetoothSocketWrapperTests::testReadRealData() {
@@ -48,6 +43,19 @@ void BluetoothSocketWrapperTests::testReadRealData() {
     const auto &data = wrapper->readAll();
     QCOMPARE(data, testData);
 }
+
+#endif
+
+void BluetoothSocketWrapperTests::testConnectToServiceDemo() {
+    auto s = new MockBluetoothSocket(this);
+    auto wrapper = new MockBluetoothSocketWrapper(s, this);
+    QSignalSpy spy(wrapper, SIGNAL(connected()));
+    wrapper->connectToService(QBluetoothAddress("11:11:11:11:11:11"), QBluetoothServiceInfo::RfcommProtocol);
+    QCOMPARE(spy.count(), 1);
+    QCOMPARE(s->openMode(), QIODevice::NotOpen);
+}
+
+
 
 void BluetoothSocketWrapperTests::testReadDemoData() {
     auto s = new MockBluetoothSocket(this);

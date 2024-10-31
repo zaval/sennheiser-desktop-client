@@ -1,7 +1,3 @@
-//
-// Created by Dmytrii Zavalnyi on 21.10.2024..
-//
-
 #include "DeviceInfoCardHelper.h"
 #include "gaiaV3/GAIARfcommClient.h"
 

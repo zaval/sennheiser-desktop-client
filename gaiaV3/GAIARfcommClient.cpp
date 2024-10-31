@@ -44,7 +44,8 @@ void GAIARfcommClient::setAddress(const QBluetoothAddress &deviceAddress) {
 
 GAIARfcommClient::GAIARfcommClient():
     QObject(nullptr),
-    socket(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this)),
+//    socket(new QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, this)),
+    socket(new BluetoothSocketWrapper(this)),
     m_isConnected(false),
     isSecondaryConnection(false),
     m_deviceAddress{},
@@ -52,9 +53,9 @@ GAIARfcommClient::GAIARfcommClient():
     deviceName("")
 {
 //    propertyManager = new GAIAPropertyManager(this);
-    connect(socket, &QBluetoothSocket::connected, this, &GAIARfcommClient::socketConnected);
-    connect(socket, &QBluetoothSocket::readyRead, this, &GAIARfcommClient::socketReadyRead);
-    connect(socket, &QBluetoothSocket::disconnected, this, &GAIARfcommClient::socketDisconnected);
+    connect(socket, &BluetoothSocketWrapper::connected, this, &GAIARfcommClient::socketConnected);
+    connect(socket, &BluetoothSocketWrapper::readyRead, this, &GAIARfcommClient::socketReadyRead);
+    connect(socket, &BluetoothSocketWrapper::disconnected, this, &GAIARfcommClient::socketDisconnected);
     connect(propertyManager, &GAIAPropertyManagerBase::propertyAdded, this, &GAIARfcommClient::propertyManagerAdded);
 }
 
@@ -99,22 +100,24 @@ QList<QByteArray> GAIARfcommClient::packetSplitter(const QByteArray &data) const
 
 void GAIARfcommClient::socketReadyRead() {
     const auto &dataAll = socket->readAll();
-    qDebug() << "[SOCKET] << " << dataAll;
     if (dataAll.length() < 6){
+        qDebug() << "[SOCKET] << " << dataAll;
         return;
     }
 
     const auto packets = packetSplitter(dataAll);
 
-    std::for_each(packets.begin(), packets.end(), [this](const QByteArray &data){
+    for (const auto &data: packets){
         const auto vendorCommand = data.mid(4, 4);
         auto property = propertyManager->getProperty(vendorCommand);
 
-//        qDebug() << property;
         if (property != nullptr){
+            qDebug() << "[SOCKET] << " << dataAll << " -> " << property;
             property->parse(data);
+        } else {
+            qDebug() << "[SOCKET] << " << dataAll << " -> {Unknown}";
         }
-    });
+    }
 
 }
 
@@ -152,16 +155,6 @@ QString GAIARfcommClient::getDeviceAddress() const {
     return m_deviceAddress.toString();
 }
 
-GAIARfcommClient::GAIARfcommClient(QBluetoothSocket *socket) : QObject(nullptr),
-   socket(socket),
-   m_isConnected(false),
-   isSecondaryConnection(false),
-   m_deviceAddress{},
-   propertyManager(new GAIAPropertyManager(this)),
-   deviceName("")
-{
-//    connect(propertyManager, &GAIAPropertyManagerBase::propertyAdded, this, &GAIARfcommClient::propertyManagerAdded);
-}
 
 //#ifdef Q_OS_APPLE
 //void GAIARfcommClient::setServiceInfo(const QBluetoothServiceInfo &si) {

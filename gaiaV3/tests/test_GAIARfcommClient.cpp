@@ -1,92 +1,23 @@
 #include <QtTest/QtTest>
 #include "GAIARfcommClient.h"
+#include "mock_classes.h"
 
 using namespace Qt::Literals::StringLiterals;
 
 typedef QList<QPair<quint16, quint16>> ListOfPairsOfUints;
 
-class MockGAIAPropertyManager : public GAIAPropertyManagerBase {
-    Q_OBJECT
-
-public:
-    GAIAPropertyBase *getPropertyFromVendorCommand(const quint16 &vendorId, const quint16 &commandId) override {
-        vendorCommands << QPair<quint16, quint16>{vendorId, commandId};
-        return new GAIAPropertyBase();
-    }
-
-    QList<QPair<quint16, quint16>> getVendorCommands() const {
-        return vendorCommands;
-    }
-
-private:
-
-    QList<QPair<quint16, quint16>> vendorCommands{};
-};
-
-class MockBluetoothSocket : public QBluetoothSocket {
-    Q_OBJECT
-
-public:
-    MockBluetoothSocket(QObject* parent = nullptr)
-            : QBluetoothSocket(QBluetoothServiceInfo::RfcommProtocol, parent)
-    {
-        setOpenMode(QIODevice::ReadWrite | QIODevice::Unbuffered);
-    }
-
-    void close() override {
-//        QBluetoothSocket::close();
-        setOpenMode(QIODevice::NotOpen);
-        Q_EMIT disconnected();
-    }
-
-    void setTestData(const QByteArray &data){
-        m_data = data;
-    }
-
-    QByteArray getTestData() const {
-        return m_data;
-    }
-
-    qint64 bytesAvailable() const override {
-        return m_data.size();
-    }
-
-protected:
-    qint64 readData(char *data, qint64 maxSize) override {
-
-        qDebug() << "readdata" << data << maxSize;
-
-        if (maxSize == 0 || m_data.isEmpty()){
-            return 0;
-        }
-        memcpy(data, m_data.data(), m_data.size());
-        const auto sz = m_data.length();
-        m_data.clear();
-
-        return sz;
-    }
-
-    qint64 writeData(const char *data, qint64 maxSize) override {
-        m_data.clear();
-        m_data.append(data, maxSize);
-        return maxSize;
-    }
-private:
-    QByteArray m_data;
-
-};
-
 class MockRfcommClient : public GAIARfcommClient {
     Q_OBJECT
 
 public:
-    MockRfcommClient(MockBluetoothSocket *socket = nullptr) :
-    GAIARfcommClient(socket)
+    MockRfcommClient(MockBluetoothSocket *s = nullptr)
     {
+        socket = new MockBluetoothSocketWrapper(s, this);
+
         propertyManager = new MockGAIAPropertyManager();
-        connect(socket, &MockBluetoothSocket::connected, this, &MockRfcommClient::socketConnected);
-        connect(socket, &MockBluetoothSocket::readyRead, this, &MockRfcommClient::socketReadyRead);
-        connect(socket, &MockBluetoothSocket::disconnected, this, &MockRfcommClient::socketDisconnected);
+        connect(socket, &MockBluetoothSocketWrapper::connected, this, &MockRfcommClient::socketConnected);
+        connect(socket, &MockBluetoothSocketWrapper::readyRead, this, &MockRfcommClient::socketReadyRead);
+        connect(socket, &MockBluetoothSocketWrapper::disconnected, this, &MockRfcommClient::socketDisconnected);
     }
 
     MockGAIAPropertyManager *getPropertyManager() const{
@@ -141,6 +72,7 @@ private slots:
 void GAIARfcommClientTest::testSetAddress()
 {
     auto *socket = new MockBluetoothSocket();
+    socket->open(QIODevice::ReadWrite | QIODevice::Unbuffered);
     MockRfcommClient client{socket};
     QBluetoothAddress address("00:11:22:33:44:55");
     client.setAddress(address);
@@ -239,6 +171,7 @@ void GAIARfcommClientTest::testReadSocket() {
 
     auto *socket = new MockBluetoothSocket();
     socket->setTestData(data);
+    socket->open(QIODevice::ReadWrite | QIODevice::Unbuffered);
     MockRfcommClient client{socket};
     client.testSocketReadyRead();
     const auto &actualResult = client.getPropertyManager()->getVendorCommands();
@@ -253,6 +186,7 @@ void GAIARfcommClientTest::testGetManager() {
 
 void GAIARfcommClientTest::testSendData() {
     auto *socket = new MockBluetoothSocket();
+    socket->open(QIODevice::ReadWrite | QIODevice::Unbuffered);
     MockRfcommClient client{socket};
     client.sendData("\xff\x03"_ba);
     QCOMPARE(socket->getTestData(), "\xff\x03"_ba);

@@ -2,12 +2,14 @@
 
 This is an unofficial desktop client of Sennheiser Smart Control app.
 
+![main-window.png](images/main-window.png)
+
 Currently, this app works with Momentum 4 headphones.
 
 ## Requirements
 
 * Cmake >= 3.20
-* C++ compiler supporting C++11 (GCC >= 4.8, Clang >= 3.0, MSVC >= 19)
+* C++ compiler supporting C++17 (GCC >= 7, Clang >= 4.0, MSVC >= 19)
 * Qt 6
 * Python (needed for class generation from the json schema)
 

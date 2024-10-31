@@ -39,6 +39,8 @@ qt_add_library(gaiaV3
         GAIAPropertyManager.h
         GAIAPropertyManagerBase.cpp
         GAIAPropertyManagerBase.h
+        BluetoothSocketWrapper.cpp
+        BluetoothSocketWrapper.h
 )
 
 qt_add_qml_module(gaiaV3

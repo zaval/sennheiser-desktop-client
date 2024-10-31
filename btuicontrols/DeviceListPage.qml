@@ -4,7 +4,7 @@ import QtCore
 import QtQuick
 import btuicontrols
 import QtQuick.LocalStorage
-import "Database.js" as DB
+import gaiaV3
 
 
 Page {
@@ -14,6 +14,22 @@ Page {
     Layout.fillWidth: true
     Layout.fillHeight: true
 
+    function loadDevices(){
+        listModel.clear();
+        db.execute( 'SELECT * FROM devices;', (result) => {
+            for (let i = 0; i < result.rows.length; i++) {
+                listModel.append(
+                    {
+                        name: result.rows.item(i).name,
+                        address: result.rows.item(i).address,
+                        isOnline: result.rows.item(i).address === "11:11:11:11:11:11",
+                        uuid: result.rows.item(i).uuid
+                    }
+                );
+            }
+        });
+    }
+
     Component.onCompleted: {
         // popup.open();
         if (permission.status === Qt.PermissionStatus.Undetermined)
@@ -21,11 +37,7 @@ Page {
         else if (permission.status === Qt.PermissionStatus.Granted)
             bluetoothHandler.startDeviceDiscovery();
 
-        DB.execute( 'SELECT * FROM devices;', (result) => {
-            for (let i = 0; i < result.rows.length; i++) {
-                listModel.append({name: result.rows.item(i).name, address: result.rows.item(i).address, isOnline: false, uuid: result.rows.item(i).uuid});
-            }
-        });
+        loadDevices();
     }
 
     Item {
@@ -80,7 +92,8 @@ Page {
                             popup.uuid = delegate.uuid;
                             popup.open();
                         } else {
-                            bluetoothHandler.deviceAddress = delegate.address
+                            bluetoothHandler.deviceAddress = delegate.address;
+                            GAIARfcommClient.deviceName = delegate.name;
                         }
                     }
 
@@ -104,9 +117,9 @@ Page {
 
         onNewDeviceAdded: function(name, address, uuid) {
 
-            DB.executeWithParams('SELECT * FROM devices WHERE uuid = ?;', [uuid], (result) => {
+            db.executeWithParams('SELECT * FROM devices WHERE uuid = ?;', [uuid], (result) => {
                 if (result.rows.length === 0) {
-                    DB.executeWithParams('INSERT INTO devices (name, address, uuid) VALUES (?, ?, ?);', [name, address, uuid]);
+                    db.executeWithParams('INSERT INTO devices (name, address, uuid) VALUES (?, ?, ?);', [name, address, uuid]);
                     listModel.append({name: name, address: address, isOnline: true});
                 } else {
                     let uuid = result.rows[0].uuid;
@@ -177,9 +190,13 @@ Page {
         }
 
         onAccepted: function() {
-            DB.executeWithParams('UPDATE devices SET address = ? WHERE uuid = ?', [deviceAddress.text, popup.uuid]);
+            db.executeWithParams('UPDATE devices SET address = ? WHERE uuid = ?', [deviceAddress.text, popup.uuid]);
             bluetoothHandler.deviceAddress = deviceAddress.text
         }
 
+    }
+
+    DatabaseStorage {
+        id: db
     }
 }

@@ -13,7 +13,7 @@ add_definitions(-DPROJECT_DESCRIPTION=${CMAKE_PROJECT_DESCRIPTION})
 add_definitions(-DPROJECT_URL="${CMAKE_PROJECT_HOMEPAGE_URL}")
 
 
-set(CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
 set(MACOSX_BUNDLE_ICON_FILE sennheiserDesktopClient.icns)
 set(app_icon_macos "${CMAKE_CURRENT_SOURCE_DIR}/resources/sennheiserDesktopClient.icns")
 set_source_files_properties(${app_icon_macos} PROPERTIES

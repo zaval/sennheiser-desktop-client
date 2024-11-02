@@ -1,6 +1,7 @@
 cmake_minimum_required(VERSION 3.20)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
+set(ECM_MODULE_DIR ${CMAKE_SOURCE_DIR}/cmake )
 include(FeatureSummary)
 
 include(ECMAddAppIcon)
@@ -21,13 +22,13 @@ add_definitions(-DPROJECT_URL="${CMAKE_PROJECT_HOMEPAGE_URL}")
 
 set(
         ICONS
-        resources/icons/16-icon.png
-        resources/icons/32-icon.png
-        resources/icons/64-icon.png
-        resources/icons/128-icon.png
-        resources/icons/256-icon.png
-        resources/icons/512-icon.png
-        resources/icons/1024-icon.png
+        resources/icons/16-apps-sennheiser-desktop-client.png
+        resources/icons/32-apps-sennheiser-desktop-client.png
+        resources/icons/64-apps-sennheiser-desktop-client.png
+        resources/icons/128-apps-sennheiser-desktop-client.png
+        resources/icons/256-apps-sennheiser-desktop-client.png
+        resources/icons/512-apps-sennheiser-desktop-client.png
+        resources/icons/1024-apps-sennheiser-desktop-client.png
 )
 
 
@@ -50,6 +51,12 @@ qt_add_executable(
 
 )
 ecm_add_app_icon(sennheiserDesktopClient ICONS ${ICONS} OUTFILE_BASENAME "Appicon")
+
+if(UNIX AND NOT APPLE)
+        include(GNUInstallDirs)
+        include(ECMInstallIcons)
+        ecm_install_icons( ICONS ${ICONS} DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons )
+endif()
 
 qt_add_resources(
         sennheiserDesktopClient "res"
@@ -100,7 +107,7 @@ if (APPLE)
     endif()
 endif()
 
-
+set(CMAKE_INSTALL_PREFIX ${CMAKE_SOURCE_DIR}/app) # for testing
 
 if(APPLE)
     set(deploy_tool_options_arg -qmldir=${CMAKE_SOURCE_DIR})
@@ -124,6 +131,11 @@ qt_generate_deploy_qml_app_script(
         DEPLOY_TOOL_OPTIONS ${deploy_tool_options_arg}
 )
 install(SCRIPT ${deploy_script})
+
+if(UNIX AND NOT APPLE)
+    install(FILES ${CMAKE_SOURCE_DIR}/sennheiserDesktopClient.desktop DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/applications)
+#     install(FILES ${CMAKE_SOURCE_DIR}/resources/icons/256-apps-sennheiser-desktop-client.png DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/256x256/apps)
+endif()
 set(CPACK_PACKAGE_NAME sennheiser-desktop-client)
 #https://github.com/elfmz/far2l/blob/c35f97e275ef5bbbd8f292207e8d28b6e8f4af1d/packaging/CMakeLists.txt
 if(APPLE)
@@ -137,12 +149,14 @@ endif()
 if (UNIX AND NOT APPLE)
     find_program(DPKG_CMD dpkg)
     if(DPKG_CMD)
+        set(CPACK_PACKAGE_VENDOR "zaval")
         set(CPACK_GENERATOR DEB)
         set(CPACK_DEBIAN_BASE_PACKAGE_NAME ${CPACK_PACKAGE_NAME})
         set(CPACK_DEBIAN_FILE_NAME DEB-DEFAULT)
         set(CPACK_DEBIAN_PACKAGE_MAINTAINER ${CPACK_PACKAGE_VENDOR})
         set(CPACK_DEBIAN_PACKAGE_SECTION sound)
         set(CPACK_DEBIAN_PACKAGE_PRIORITY optional)
+        set(CPACK_PACKAGE_CONTACT ${CPACK_PACKAGE_VENDOR})
         set(CPACK_DEBIAN_PACKAGE_DEPENDS "libqt6dbus6 (>= 6.5.0), libqt6qml6 (>= 6.5.0), libqt6core6t64 (>= 6.5.0), libqt6network6 (>= 6.5.0), libqt6gui6t64 (>= 6.5.0), libqt6bluetooth6 (>= 6.5.0)")
     else(DPKG_CMD)
         MESSAGE( STATUS "dpkg binary not found, not building debian package" )

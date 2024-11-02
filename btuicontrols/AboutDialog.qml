@@ -16,6 +16,12 @@ Dialog {
         color: Qt.alpha(root.palette.shadow, 0.5)
         // color: "#55888888"
     }
+    background: Rectangle {
+        color: root.palette.window
+        border.color: root.palette.shadow
+        border.width: 1
+        radius: 5
+    }
 
     enter: Transition {
         NumberAnimation {

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Sennheiser Smart Connect
+Exec=sennheiserDesktopClient
+Icon=sennheiser-desktop-client
+Comment=Sennheiser Smart Connect
+Type=Application
+StartupNotify=true
+Categories=Qt;KDE;Utility;

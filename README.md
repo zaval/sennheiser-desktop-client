@@ -20,6 +20,23 @@ cmake -S . -B build
 cmake --build build -- -j
 ```
 
+## MacOS build
+
+1. Get the codesign authority string `security find-identity -v -p codesigning`
+   1. For development/testing, use an **Apple Development** certificate
+   2. For distributing use a **Developer ID Application** certificate (Requires an Apple developer account)
+2. Build and create an installer
+
+```shell
+cmake -S . \
+   -B build \
+   -DCMAKE_CODESIGN_IDENTITY=<certificate_hash> \
+   -DCMAKE_BUILD_TYPE=Release
+cmake --build build -- -j
+cd build 
+cpack .
+```
+
 If you have Qt in some custom path, for example installed from the qt installer 
 add `-DCMAKE_PREFIX_PATH=/path/to/Qt/6.x.x/os`
 
